@@ -73,8 +73,9 @@ class ArbolAVL:
 #%%
 
 
-    def iterador(self):
+    def Iterador(self):
         return self.__next__()
+    
     def agregar(self,clave,valor):
         if self.raiz:
             self._agregar(clave,valor,self.raiz)
@@ -94,6 +95,7 @@ class ArbolAVL:
             else:
                    nodoActual.der = NodoArbol(clave,valor,padre=nodoActual)
 
+    
     def __setitem__(self,c,v):
        self.agregar(c,v)
 
