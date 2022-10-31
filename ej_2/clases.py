@@ -52,7 +52,9 @@ class NodoArbol:
            self.izq.padre = self
        if self.tiene_der():
            self.der.padre = self
-            
+  
+           
+#%%
 class ArbolAVL:
 
     def __init__(self):
@@ -68,7 +70,11 @@ class ArbolAVL:
     def __iter__(self):
         return self.raiz.__iter__()
    
+#%%
 
+
+    def iterador(self):
+        return self.__next__()
     def agregar(self,clave,valor):
         if self.raiz:
             self._agregar(clave,valor,self.raiz)
