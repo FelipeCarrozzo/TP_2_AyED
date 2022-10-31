@@ -4,10 +4,19 @@ class NodoArbol:
    
    def __init__(self,clave,valor,izquierdo=None,derecho=None,padre=None):
         self.clave = clave
+        self.valor = valor
         self.carga_util = valor
         self.izq = izquierdo
         self.der = derecho
         self.padre = padre
+    
+   def __str__(self):
+       return str(self.clave) + str(self.valor)
+        
+    
+   def __repr__(self):
+       return str(self)
+       
         
    def __iter__(self):
       if self:
@@ -52,7 +61,21 @@ class NodoArbol:
            self.izq.padre = self
        if self.tiene_der():
            self.der.padre = self
-  
+           
+   def encontrarSucesor(self):
+      suc = None
+      if self.tiene_hijo_derecho():
+          suc = self.der.encontrarMin()
+      else:
+          if self.padre:
+                 if self.eshijo_izquierdo():
+                     suc = self.padre
+                 else:
+                     self.padre.der = None
+                     suc = self.padre.encontrarSucesor()
+                     self.padre.der = self
+      return suc
+      
            
 #%%
 class ArbolAVL:
@@ -60,7 +83,11 @@ class ArbolAVL:
     def __init__(self):
         self.raiz = None
         self.tamano = 0
-
+    
+    def __str__(self):
+        lista = [nodo for nodo in self]
+        return str(lista)
+    
     def longitud(self):
         return self.tamano
 
@@ -69,12 +96,12 @@ class ArbolAVL:
     
     def __iter__(self):
         return self.raiz.__iter__()
-   
-#%%
 
 
-    def Iterador(self):
+    def iterador(self):
         return self.__next__()
+
+#------------------------------------------------------------------------------
     
     def agregar(self,clave,valor):
         if self.raiz:
@@ -167,19 +194,7 @@ class ArbolAVL:
                   self.der.padre = self.padre
 
 
-    def encontrarSucesor(self):
-      suc = None
-      if self.tiene_hijo_derecho():
-          suc = self.der.encontrarMin()
-      else:
-          if self.padre:
-                 if self.eshijo_izquierdo():
-                     suc = self.padre
-                 else:
-                     self.padre.der = None
-                     suc = self.padre.encontrarSucesor()
-                     self.padre.der = self
-      return suc
+    
 
 
     def encontrarMin(self):
@@ -294,8 +309,26 @@ class ArbolAVL:
               else:
                 self.rotarDerecha(nodo)
                 
-                
-                
+
+
+class Iterador:
+    def __init__(self, arbol, clave_inicio): 
+        self.arbol = arbol 
+        self.nodo_inicio = arbol._obtener(clave_inicio, self.arbol.raiz)
+
+    def __next__(self):
+        nodo_salida = self.nodo_inicio
+        self.nodo_inicio = self.nodo_inicio.encontrarSucesor()
+        if self.nodo_inicio == None:
+            raise StopIteration
+        return nodo_salida
+
+    def __iter__(self):
+        return self
+    
+
+
+#%%
                 
 if __name__ == "__main__":
     mediciones = ArbolAVL()
