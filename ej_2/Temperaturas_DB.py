@@ -17,39 +17,43 @@ class Temperaturas_DB:
         self.mediciones = ArbolAVL()
         
     def __str__(self):
-        return str(self.mediciones)
+        lista=[]
+        for nodo in self.mediciones:
+            lista.append([(nodo.clave.date()), nodo.carga_util])
+        return str(lista)
+
     
     def __iter__(self):
         return str(self.mediciones)
 
 #%%        
-    def mostrar_temperaturas(self, p_fecha1, p_fecha2):
-        fecha1_dt = datetime.strptime(p_fecha1, "%Y/%m/%d")
-        fecha2_dt = datetime.strptime(p_fecha2, "%Y/%m/%d")
-            
-        iterador = Iterador(self.mediciones, fecha1_dt)
-        listado=[]
-            
-        for nodo in iterador:
-            if  fecha1_dt <= nodo.clave <= fecha2_dt:
-                listado.append([str(nodo.clave.date()), nodo.carga_util])
-        print(listado) #uestra por consola un listado de las mediciones 
+    """Método para mostrar la totalidad de temperaturas 
+    medidas entre una fecha y otra."""
 
-
+    def mostrar_temperaturas_rango(self,fecha1,fecha2):
+        f_uno = datetime.strptime(fecha1, "%Y/%m/%d")
+        f_dos = datetime.strptime(fecha2, "%Y/%m/%d")
+        Iter = Iterador(self.mediciones,f_uno)
+        lista=[]
+        for nodo in Iter:
+            if f_uno <= nodo.clave <= f_dos:
+                lista.append([str(nodo.clave.date()), nodo.carga_util])
+        print(lista)
 
 
     def guardar_temperatura(self,temperatura,fecha):
         convertir_fecha = datetime.strptime(fecha,"%Y/%m/%d")
         self.mediciones.agregar(convertir_fecha,temperatura)
+
         
     def devolver_temperatura(self,fecha):
         convertir_fecha = datetime.strptime(fecha,"%Y/%m/%d")
         self.mediciones.obtener(convertir_fecha)
         
+        
     def max_temp_rango(self,fecha1, fecha2):
         f_uno = datetime.strptime(fecha1, "%Y/%m/%d")
         f_dos = datetime.strptime(fecha2, "%Y/%m/%d")
-        
         temp_max = self.mediciones.obtener(f_uno)
         ITERADOR = Iterador(self.mediciones, f_dos)
         
@@ -77,7 +81,7 @@ class Temperaturas_DB:
 
         
         
-#%%
+
 
 if __name__ == "__main__":
     obj=Temperaturas_DB()
@@ -87,4 +91,10 @@ if __name__ == "__main__":
     obj.guardar_temperatura(25,"2022/10/23")
     obj.guardar_temperatura(23,"2022/10/24")
     obj.guardar_temperatura(15,"2022/10/25")
-    print(obj.mostrar_temperaturas("2022/10/20", "2022/10/25"))
+    # (obj.mostrar_temperaturas_rango("2022/10/20", "2022/10/25"))
+    print(obj.devolver_temperatura("2022/10/24")) #correjir delvolver_temperatura 
+    
+    print(obj.max_temp_rango("2022/10/24", "2022/10/20"))
+ 
+    
+    
