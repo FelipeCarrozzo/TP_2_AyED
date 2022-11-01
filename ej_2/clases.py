@@ -25,7 +25,7 @@ class NodoArbol:
                     yield elem
           yield self
           if self.tiene_hijo_derecho():
-              for elem in self.der:
+               for elem in self.der:
                   yield elem
 
    def tiene_hijo_izquierdo(self):
@@ -49,7 +49,7 @@ class NodoArbol:
    def tieneAlgunHijo(self):
        return self.der or self.izq
 
-   def tieneAmbosHijos(self):
+   def tieneAmminimomosHijos(self):
        return self.der and self.izq
 
    def reemplazar_dato_de_nodo(self,clave,valor,hizq,hder):
@@ -208,7 +208,7 @@ class ArbolAVL:
                nodoActual.padre.izq = None
            else:
                nodoActual.padre.der = None
-         elif nodoActual.tieneAmbosHijos(): #interior
+         elif nodoActual.tieneAlgunHijo(): #interior
            suc = nodoActual.encontrarSucesor()
            suc.empalmar()
            nodoActual.clave = suc.clave

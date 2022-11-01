@@ -23,6 +23,7 @@ class Temperaturas_DB:
         for nodo in self.mediciones:
             lista.append([(nodo.clave.date()), nodo.carga_util])
         return str(lista)
+    #pasar a la clase nodo
 
     
     def __iter__(self):
@@ -75,8 +76,9 @@ class Temperaturas_DB:
         f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         
         
-    def borrar_temperatura(self,fecha):
-        self.mediciones.remover(fecha) 
+    def borrar_temperatura(self,fecha_str):
+        fecha_conv = datetime.strptime(fecha_str, "%d/%m/%Y")
+        self.mediciones.eliminar(fecha_conv) 
     
     """Método para mostrar la totalidad de temperaturas 
     medidas entre una fecha y otra."""
@@ -112,8 +114,7 @@ if __name__ == "__main__":
     print("MAX",obj.max_temp_rango("20/10/2022", "28/10/2022"))
     print("MIN",obj.min_temp_rango("20/10/2022", "28/10/2022")  )  
     print(obj.borrar_temperatura("25/10/2022"))
-    
-    
+    print(obj)
     # (obj.mostrar_temperaturas_rango("2022/10/20", "2022/10/25"))
     
     # print(obj.mostrar_cantidad_muestras())
