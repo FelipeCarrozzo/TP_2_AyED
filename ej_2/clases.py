@@ -11,8 +11,11 @@ class NodoArbol:
         self.padre = padre
     
    def __str__(self):
-       return str(self.clave) + str(self.valor)
-        
+       # return str(self.clave) + str(self.valor)
+        lista=[]
+        for nodo in self.mediciones:
+            lista.append([(nodo.clave.date()), nodo.carga_util])
+        return str(lista) 
     
    def __repr__(self):
        return str(self)
@@ -82,6 +85,26 @@ class NodoArbol:
                      self.padre.der = self
       return suc
   
+   def empalmar(self):
+       if self.esHoja():
+           if self.eshijo_izquierdo():
+                  self.padre.izq = None
+           else:
+                  self.padre.der = None
+       elif self.tieneAlgunHijo():
+           if self.tiene_hijo_izquierdo():
+                  if self.eshijo_izquierdo():
+                     self.padre.izq = self.izq
+                  else:
+                     self.padre.der = self.izq
+                  self.izq.padre = self.padre
+           else:
+                  if self.eshijo_izquierdo():
+                     self.padre.izq = self.der
+                  else:
+                     self.padre.der = self.der
+                  self.der.padre = self.padre
+  
                
 #%%
 class ArbolAVL:
@@ -93,6 +116,7 @@ class ArbolAVL:
     def __str__(self):
         lista = [nodo for nodo in self]
         return str(lista)
+
     
     def longitud(self):
         return self.tamano
@@ -177,29 +201,6 @@ class ArbolAVL:
 
     def __delitem__(self,clave):
        self.eliminar(clave)
-
-
-    def empalmar(self):
-       if self.esHoja():
-           if self.eshijo_izquierdo():
-                  self.padre.izq = None
-           else:
-                  self.padre.der = None
-       elif self.tieneAlgunHijo():
-           if self.tiene_hijo_izquierdo():
-                  if self.eshijo_izquierdo():
-                     self.padre.izq = self.izq
-                  else:
-                     self.padre.der = self.izq
-                  self.izq.padre = self.padre
-           else:
-                  if self.eshijo_izquierdo():
-                     self.padre.izq = self.der
-                  else:
-                     self.padre.der = self.der
-                  self.der.padre = self.padre
-                  
-
 
 
     def remover(self,nodoActual):
@@ -326,7 +327,6 @@ class Iterador:
     
 
 
-#%%
                 
 if __name__ == "__main__":
     mediciones = ArbolAVL()
