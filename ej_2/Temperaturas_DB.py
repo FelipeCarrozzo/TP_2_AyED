@@ -23,6 +23,21 @@ class Temperaturas_DB:
         return str(self.mediciones)
 
 #%%        
+    def mostrar_temperaturas(self, p_fecha1, p_fecha2):
+        fecha1_dt = datetime.strptime(p_fecha1, "%Y/%m/%d")
+        fecha2_dt = datetime.strptime(p_fecha2, "%Y/%m/%d")
+            
+        iterador = Iterador(self.mediciones, fecha1_dt)
+        listado=[]
+            
+        for nodo in iterador:
+            if  fecha1_dt <= nodo.clave <= fecha2_dt:
+                listado.append([str(nodo.clave.date()), nodo.carga_util])
+        print(listado) #uestra por consola un listado de las mediciones 
+
+
+
+
     def guardar_temperatura(self,temperatura,fecha):
         convertir_fecha = datetime.strptime(fecha,"%Y/%m/%d")
         self.mediciones.agregar(convertir_fecha,temperatura)
@@ -34,6 +49,7 @@ class Temperaturas_DB:
     def max_temp_rango(self,fecha1, fecha2):
         f_uno = datetime.strptime(fecha1, "%Y/%m/%d")
         f_dos = datetime.strptime(fecha2, "%Y/%m/%d")
+        
         temp_max = self.mediciones.obtener(f_uno)
         ITERADOR = Iterador(self.mediciones, f_dos)
         
@@ -44,22 +60,31 @@ class Temperaturas_DB:
         return temp_max
     
     def min_temp_rango(self,fecha1, fecha2):
-        f_uno = datetime.strptime(fecha1, "%Y/%m/%d").date()
-        f_dos = datetime.strptime(fecha2, "%Y/%m/%d").date()
+        f_uno = datetime.strptime(fecha1, "%Y/%m/%d")
+        f_dos = datetime.strptime(fecha2, "%Y/%m/%d")
         temp_max = self.mediciones.obtener(f_uno)
         ITERADOR = Iterador(self.mediciones, f_dos)
-        
+        l_temp = []
         for i in ITERADOR:
             if f_uno >= NodoArbol.clave >= f_dos:
+                conversion = [str(NodoArbol.clave.date()), NodoArbol.carga_util]
+                l_temp.append(conversion)
                 if NodoArbol.carga_util < temp_max:
                     temp_max = NodoArbol.carga_util
         return temp_max
+    
+    
+
+        
         
 #%%
 
 if __name__ == "__main__":
     obj=Temperaturas_DB()
-    obj.guardar_temperatura(30,"2022/10/29")
-    obj.guardar_temperatura(10,"2022/10/30")
-    # obj.max_temp_rango("2022/10/29","2022/10/30")
-    print(obj)
+    obj.guardar_temperatura(30,"2022/10/20")
+    obj.guardar_temperatura(27,"2022/10/21")
+    obj.guardar_temperatura(26,"2022/10/22")
+    obj.guardar_temperatura(25,"2022/10/23")
+    obj.guardar_temperatura(23,"2022/10/24")
+    obj.guardar_temperatura(15,"2022/10/25")
+    print(obj.mostrar_temperaturas("2022/10/20", "2022/10/25"))

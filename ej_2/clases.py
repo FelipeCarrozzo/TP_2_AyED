@@ -75,8 +75,8 @@ class NodoArbol:
                      suc = self.padre.encontrarSucesor()
                      self.padre.der = self
       return suc
-      
-           
+  
+               
 #%%
 class ArbolAVL:
 
@@ -192,16 +192,14 @@ class ArbolAVL:
                   else:
                      self.padre.der = self.der
                   self.der.padre = self.padre
-
-
-    
-
-
+                  
     def encontrarMin(self):
       actual = self
       while actual.tiene_hijo_izquierdo():
           actual = actual.izq
-      return actual
+      return actual 
+  
+    
 
 
     def remover(self,nodoActual):
