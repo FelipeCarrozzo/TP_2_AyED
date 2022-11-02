@@ -49,12 +49,9 @@ class Temperaturas_DB:
         f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         temp_max = self.mediciones.obtener(f_uno)
         ITERADOR = Iterador(self.mediciones, f_uno)
-        l_temp = []
 
         for i in ITERADOR:
             if f_uno <= i.clave <= f_dos:
-                conversion = [str(i.clave.date()), i.carga_util]
-                l_temp.append(conversion)
                 if i.carga_util > temp_max:
                     temp_max = i.carga_util
         return temp_max
@@ -67,15 +64,11 @@ class Temperaturas_DB:
         l_temp = []
         for i in Iter:
             if f_uno <= i.clave <= f_dos:
-                # conversion = [str(i.clave.date()), i.carga_util]
-                # l_temp.append(conversion)
                 if i.carga_util < temp_min:
                     temp_min = i.carga_util
         return temp_min
     
     def temp_extremos_rango(self,fecha1,fecha2):
-        # f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
-        # f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         min_ = self.min_temp_rango(fecha1, fecha2)
         max_ = self.max_temp_rango(fecha1, fecha2)
         return f" MINIMO: {min_} MÁXIMO: {max_}"        
@@ -94,7 +87,7 @@ class Temperaturas_DB:
         lista=[]
         for i in Iter:
             if f_uno <= i.clave <= f_dos:
-                lista.append((i.clave.date() ,i.valor))
+                lista.append((i.clave.date(), i.valor))
         print(lista)
     
     
@@ -118,8 +111,6 @@ if __name__ == "__main__":
     print("Delvolver temp",obj.devolver_temperatura("25/10/2022"))
     # -------------------------------------------------------------------
     print("MAX temp en un rango",obj.max_temp_rango("20/10/2022", "28/10/2022"))
-    #----------------------------------------------------------------------
-
     print("MIN temp en un rango",obj.min_temp_rango("20/10/2022", "28/10/2022"))
     # -------------------------------------------------------------------
     print("Borrar temperatura"), obj.borrar_temperatura("25/10/2022")

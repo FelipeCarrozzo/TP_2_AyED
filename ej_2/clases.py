@@ -10,15 +10,15 @@ class NodoArbol:
         self.der = derecho
         self.padre = padre
     
-   def __str__(self):
-       # return str(self.clave) + str(self.valor)
-        lista=[]
-        for nodo in self.mediciones:
-            lista.append([(nodo.clave.date()), nodo.carga_util])
-        return str(lista) 
+   # def __str__(self):
+   #      return str(self.clave) + str(self.valor)
+        # lista=[]
+        # for nodo in self:
+        #     lista.append([(nodo.clave.date()), nodo.carga_util])
+        # return str(lista) 
     
-   def __repr__(self):
-       return str(self)
+   # def __repr__(self):
+   #     return str(self)
        
         
    def __iter__(self):
@@ -113,9 +113,9 @@ class ArbolAVL:
         self.raiz = None
         self.tamano = 0
     
-    def __str__(self):
-        lista = [nodo for nodo in self]
-        return str(lista)
+    # def __str__(self):
+    #     lista = [nodo for nodo in self]
+    #     return str(lista)
 
     
     def longitud(self):
@@ -326,8 +326,6 @@ class Iterador:
         return self
     
 
-
-                
 if __name__ == "__main__":
     mediciones = ArbolAVL()
     mediciones.agregar(date(2021,11,9),23)
@@ -337,8 +335,9 @@ if __name__ == "__main__":
     mediciones.agregar(date(2021,3,13),16)    
     mediciones.agregar(date(2019,4,19),11)                   
     print(mediciones.tamano)
-    print(mediciones.raiz.clave)
+    print(mediciones.raiz.valor)
+    
     print()
     
     for nodo in mediciones:
-        print (nodo.clave, nodo.carga_util)
+        print (nodo.clave, nodo.valor)
