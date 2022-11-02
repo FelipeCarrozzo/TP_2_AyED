@@ -74,8 +74,6 @@ class Temperaturas_DB:
         return temp_min
     
     def temp_extremos_rango(self,fecha1,fecha2):
-        # f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
-        # f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         min_ = self.min_temp_rango(fecha1, fecha2)
         max_ = self.max_temp_rango(fecha1, fecha2)
         return f" MINIMO: {min_} MÁXIMO: {max_}"        
@@ -115,7 +113,7 @@ if __name__ == "__main__":
     obj.guardar_temperatura("27/10/2022",10)
     obj.guardar_temperatura("28/10/2022",5)
     #----------------------------------------------------------------------
-    print("Delvolver temp",obj.devolver_temperatura("25/10/2022"))
+    print("Delvolver temp",obj.devolver_temperatura("23/10/2022"))
     # -------------------------------------------------------------------
     print("MAX temp en un rango",obj.max_temp_rango("20/10/2022", "28/10/2022"))
     #----------------------------------------------------------------------
@@ -128,6 +126,7 @@ if __name__ == "__main__":
     # -------------------------------------------------------------------
     print("mostrar temps en un rango"),obj.mostrar_temperaturas_rango("20/10/2022", "28/10/2022")
     
+    print("mostrar cantidad de muestras registradas", obj.mostrar_cantidad_muestras())
     
-    
+ 
     
