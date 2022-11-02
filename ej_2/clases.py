@@ -317,9 +317,9 @@ class Iterador:
 
     def __next__(self):
         nodo_salida = self.nodo_inicio
-        self.nodo_inicio = self.nodo_inicio.encontrarSucesor()
         if self.nodo_inicio == None:
             raise StopIteration
+        self.nodo_inicio = self.nodo_inicio.encontrarSucesor()
         return nodo_salida
 
     def __iter__(self):

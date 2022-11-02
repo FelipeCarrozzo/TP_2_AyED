@@ -94,7 +94,7 @@ class Temperaturas_DB:
         lista=[]
         for i in Iter:
             if f_uno <= i.clave <= f_dos:
-                lista.append((i.clave.date() ,i.valor))
+                lista.append((str(i.clave.date()) ,i.valor))
         print(lista)
     
     
@@ -112,8 +112,8 @@ if __name__ == "__main__":
     obj.guardar_temperatura("24/10/2022",23)
     obj.guardar_temperatura("25/10/2022",22)
     obj.guardar_temperatura("26/10/2022",12)
-    obj.guardar_temperatura("27/10/2022",3)
-    obj.guardar_temperatura("28/10/2022",33)
+    obj.guardar_temperatura("27/10/2022",10)
+    obj.guardar_temperatura("28/10/2022",5)
     #----------------------------------------------------------------------
     print("Delvolver temp",obj.devolver_temperatura("25/10/2022"))
     # -------------------------------------------------------------------

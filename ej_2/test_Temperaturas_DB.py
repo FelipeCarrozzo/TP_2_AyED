@@ -7,24 +7,24 @@ from datetime import datetime
 class TestTemperaturasDB(unittest.TestCase):
     """Test de la clase Temperaturas_DB"""
     
-    def SetUp(self):
-        self.val_aleat_min = 5
-        self.val_aleat_max = 40
-        self.cant_temp = 30
-        self.inicio_fecha = datetime(10, 5, 2022)
-        self.fin_fecha = datetime(25, 5, 2022)
+    def setUp(self):
+        self.cant_temp = 0
+        self.lista_fecha = ["21/10/2022","22/10/2022","23/10/2022","24/10/2022"]
+        self.temperatura = [24,27,14,10]
         self.temp = Temperaturas_DB() 
          
-
-    
     def test_guardar_temperatura(self):
-        lista_aux = []
-        for  i in range(30):
-            temp = random.randint(self.val_aleat_min, self.val_aleat_max)
-            fecha = self.inicio_fecha + (self.fin_fecha - self.inicio_fecha) * random.random()
-            self.temp.guardar_temperatura(fecha, temp)
-           
+        for fecha,temp in zip (self.lista_fecha,self.temperatura):
+            self.temp.guardar_temperatura(fecha, temp)   
+            self.cant_temp +=1
         self.assertEqual(self.temp.tamano, self.cant_temp)
+
+
+    def test_
+
+
+
+
 
 if __name__ == "__main__":
     unittest.main()
