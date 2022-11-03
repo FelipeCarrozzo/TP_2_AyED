@@ -19,16 +19,19 @@ class Temperaturas_DB:
         self.mediciones = ArbolAVL()
         self.tamano = 0
         
-    # def __str__(self):
-    #     lista=[]
-    #     for nodo in self.mediciones:
-    #         lista.append([(nodo.clave.date()), nodo.carga_util])
-    #     return str(lista)
-    #pasar a la clase nodo
+    def __str__(self):
+        lista=[]
+        for nodo in self.mediciones:
+            lista.append([str(nodo.clave.date()), nodo.carga_util])
+        return str(lista)
+
 
     
     def __iter__(self):
         return str(self.mediciones)
+    
+    def __len__(self):
+        return len(self.mediciones)
 
 #%%        
 
@@ -76,7 +79,8 @@ class Temperaturas_DB:
     def temp_extremos_rango(self,fecha1,fecha2):
         min_ = self.min_temp_rango(fecha1, fecha2)
         max_ = self.max_temp_rango(fecha1, fecha2)
-        return f" MINIMO: {min_} MÁXIMO: {max_}"        
+        # return f" MINIMO: {min_} MÁXIMO: {max_}"
+        return min_,max_        
         
     def borrar_temperatura(self,fecha_str):
         fecha_conv = datetime.strptime(fecha_str, "%d/%m/%Y")
@@ -85,48 +89,47 @@ class Temperaturas_DB:
     
     """Método para mostrar la totalidad de temperaturas 
     medidas entre una fecha y otra."""
-    def mostrar_temperaturas_rango(self,fecha1,fecha2):
+    def mostrar_temperaturas(self,fecha1,fecha2):
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
         f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         Iter = Iterador(self.mediciones,f_uno)
         lista=[]
         for i in Iter:
             if f_uno <= i.clave <= f_dos:
-                lista.append((str(i.clave.date()) ,i.valor))
-        print(lista)
+                lista.append(i.valor)
+        print(type(lista))
     
     
     def mostrar_cantidad_muestras(self):
-        cantidad = self.mediciones.tamano
+        cantidad = self.tamano
         return cantidad
         
 
 if __name__ == "__main__":
     obj=Temperaturas_DB()
     print("Guardar Temperatura"), obj.guardar_temperatura("20/10/2022",30)
-    obj.guardar_temperatura("21/10/2022",27)
-    obj.guardar_temperatura("22/10/2022",26)
-    obj.guardar_temperatura("23/10/2022",25)
-    obj.guardar_temperatura("24/10/2022",23)
-    obj.guardar_temperatura("25/10/2022",22)
-    obj.guardar_temperatura("26/10/2022",12)
-    obj.guardar_temperatura("27/10/2022",10)
-    obj.guardar_temperatura("28/10/2022",5)
+    obj.guardar_temperatura("21/09/2022",27)
+    obj.guardar_temperatura("06/08/2022",26)
+    obj.guardar_temperatura("29/10/2022",25)
+    obj.guardar_temperatura("07/03/2022",23)
+    obj.guardar_temperatura("09/01/2022",22)
+    obj.guardar_temperatura("15/06/2022",12)
+    obj.guardar_temperatura("19/07/2022",10)
+    obj.guardar_temperatura("03/12/2022",5)
     #----------------------------------------------------------------------
-    print("Delvolver temp",obj.devolver_temperatura("23/10/2022"))
+    print("Delvolver temp",obj.devolver_temperatura("29/10/2022"))
     # -------------------------------------------------------------------
-    print("MAX temp en un rango",obj.max_temp_rango("20/10/2022", "28/10/2022"))
+    print("MAX temp en un rango",obj.max_temp_rango("07/03/2022", "29/10/2022"))
     #----------------------------------------------------------------------
 
-    print("MIN temp en un rango",obj.min_temp_rango("20/10/2022", "28/10/2022"))
+    print("MIN temp en un rango",obj.min_temp_rango("07/03/2022", "29/10/2022"))
     # -------------------------------------------------------------------
-    print("Borrar temperatura"), obj.borrar_temperatura("25/10/2022")
+    print("Borrar temperatura"), obj.borrar_temperatura("29/10/2022")
     # -------------------------------------------------------------------
-    print("max y min en un rango",obj.temp_extremos_rango("20/10/2022", "28/10/2022"))
+    print("max y min en un rango",obj.temp_extremos_rango("07/03/2022", "29/10/2022"))
     # -------------------------------------------------------------------
-    print("mostrar temps en un rango"),obj.mostrar_temperaturas_rango("20/10/2022", "28/10/2022")
+    print("mostrar temps en un rango"),obj.mostrar_temperaturas("07/03/2022", "29/10/2022")
     
     print("mostrar cantidad de muestras registradas", obj.mostrar_cantidad_muestras())
     
- 
-    
+    print(obj) 
