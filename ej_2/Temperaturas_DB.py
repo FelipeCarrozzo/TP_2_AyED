@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Oct 20 11:36:21 2022
-
-@author: alumno
-"""
-
-from ej_2.clases import NodoArbol 
 from ej_2.clases import ArbolAVL
 from ej_2.clases import Iterador
 from datetime import datetime 
@@ -18,6 +10,7 @@ class Temperaturas_DB:
     def __init__(self):
         self.mediciones = ArbolAVL()
         self.tamano = 0
+
         
     def __str__(self):
         lista=[]
@@ -25,28 +18,33 @@ class Temperaturas_DB:
             lista.append([str(nodo.clave.date()), nodo.carga_util])
         return str(lista)
 
-
     
     def __iter__(self):
         return str(self.mediciones)
+    
     
     def __len__(self):
         return len(self.mediciones)
 
 #%%        
 
+    """Método que agrega al árbol AVL un nodo. Allí inserta 
+    una clave y un valor (en este caso, fecha y temperatura, 
+    respectivamente), los cuales se pasan por parámetro."""
     def guardar_temperatura(self,fecha,temperatura):
         convertir_fecha = datetime.strptime(fecha,"%d/%m/%Y")
         self.mediciones.agregar(convertir_fecha,temperatura)
         self.tamano += 1
-
         
+    """Método que retorna el valor (temperatura) en una fecha exacta.
+    Recibe por parámetro una clave (fecha)."""
     def devolver_temperatura(self,fecha):
         convertir_fecha = datetime.strptime(fecha,"%d/%m/%Y")
         temp = self.mediciones.obtener(convertir_fecha)
         return temp
-        
-        
+    
+    """Método que retorna, dentro de un rango de fechas, la máxima 
+    temperatura registrada. Se pasa por parámetro dos claves (fechas)."""        
     def max_temp_rango(self,fecha1, fecha2):
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
         f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
@@ -62,6 +60,9 @@ class Temperaturas_DB:
                     temp_max = i.carga_util
         return temp_max
     
+    
+    """Método que retorna, dentro de un rango de fechas, la mínima 
+    temperatura registrada. Se pasa por parámetro dos claves (fechas)."""
     def min_temp_rango(self,fecha1, fecha2):
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
         f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
@@ -76,16 +77,23 @@ class Temperaturas_DB:
                     temp_min = i.carga_util
         return temp_min
     
+    
+    """Método que devuelve la primer y última temperatura en un rango
+    de fecha. Se pasa por parámetro dos claves (fechas)"""
     def temp_extremos_rango(self,fecha1,fecha2):
         min_ = self.min_temp_rango(fecha1, fecha2)
         max_ = self.max_temp_rango(fecha1, fecha2)
         # return f" MINIMO: {min_} MÁXIMO: {max_}"
-        return min_,max_        
-        
-    def borrar_temperatura(self,fecha_str):
-        fecha_conv = datetime.strptime(fecha_str, "%d/%m/%Y")
+        return min_,max_
+    
+    
+    """Método para borrar una temperatura (y por lo tanto una fecha) del
+    árbol. Se recibe por parametro la clave a borrar (fecha)"""        
+    def borrar_temperatura(self,fecha):
+        fecha_conv = datetime.strptime(fecha, "%d/%m/%Y")
         self.mediciones.eliminar(fecha_conv) 
         self.tamano -= 1
+    
     
     """Método para mostrar la totalidad de temperaturas 
     medidas entre una fecha y otra."""
@@ -99,7 +107,8 @@ class Temperaturas_DB:
                 lista.append(i.valor)
         print(type(lista))
     
-    
+    """Método que retorna un entero (int) que representa el
+    tamaño del árbol. No recibe ningún dato por parámetro."""
     def mostrar_cantidad_muestras(self):
         cantidad = self.tamano
         return cantidad
