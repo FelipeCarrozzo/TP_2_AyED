@@ -104,8 +104,8 @@ class Temperaturas_DB:
         lista=[]
         for i in Iter:
             if f_uno <= i.clave <= f_dos:
-                lista.append(i.valor)
-        print(type(lista))
+                lista.append((str(i.clave.date()),i.valor))
+        return(lista)
     
     """Método que retorna un entero (int) que representa el
     tamaño del árbol. No recibe ningún dato por parámetro."""
