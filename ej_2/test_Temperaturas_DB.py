@@ -29,7 +29,11 @@ class TestTemperaturasDB(unittest.TestCase):
         self.assertEqual(self.temp.tamano, self.cant_temp)
 
 
-
+    """Primeramente se define una variable "fecha_temp" (fecha, temperatura),
+    luego se guardan en la base de datos temperaturas y fechas. Se llama al 
+    método a testear, y se comprueba con assertEqual que el retorno del método 
+    (int) sea igual al segundo elemento de la variable "fecha_temp"(en este caso 
+    una temperatura (int))"""
     def test_devolver_temperatura(self):
         self.temp.guardar_temperatura("21/10/2022",24)
         self.temp.guardar_temperatura("22/10/2022",27)
@@ -38,7 +42,9 @@ class TestTemperaturasDB(unittest.TestCase):
         dev = self.temp.devolver_temperatura("21/10/2022")
         self.assertEqual(self.fecha_temp[1],dev)
         
-        
+    
+    
+    """"""
     def test_max_temp_rango(self):
         mayor = 27
         self.fechamin = "21/10/2022"
@@ -99,8 +105,8 @@ class TestTemperaturasDB(unittest.TestCase):
         self.temp.guardar_temperatura("22/10/2022",27)
         self.temp.guardar_temperatura("23/10/2022",14)
         self.temp.guardar_temperatura("24/10/2022",10)
-        temp = self.temp.mostrar_temperaturas(self.fechamin, self.fechamax)
-        self.assertEqual(temp,(self.lista_temp))
+        dev = self.temp.mostrar_temperaturas(self.fechamin, self.fechamax)
+        self.assertEqual(dev,(self.lista_temp))
         
     # def test
 
