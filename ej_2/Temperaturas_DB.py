@@ -28,9 +28,9 @@ class Temperaturas_DB:
 
 #%%        
 
-    """Método que agrega al árbol AVL un nodo. Allí inserta 
-    una clave y un valor (en este caso, fecha y temperatura, 
-    respectivamente), los cuales se pasan por parámetro."""
+    """Método que agrega a la base de datos una clave y un valor 
+    (en este caso, fecha y temperatura, respectivamente), los cuales
+    se pasan por parámetro."""
     def guardar_temperatura(self,fecha,temperatura):
         convertir_fecha = datetime.strptime(fecha,"%d/%m/%Y")
         self.mediciones.agregar(convertir_fecha,temperatura)
@@ -47,15 +47,10 @@ class Temperaturas_DB:
     temperatura registrada. Se pasa por parámetro dos claves (fechas)."""        
     def max_temp_rango(self,fecha1, fecha2):
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
-        f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
-        temp_max = self.mediciones.obtener(f_uno)
+        temp_max = self.mediciones.obtener(f_uno)  #max_temp contiene la temperatura
+        
         ITERADOR = Iterador(self.mediciones, f_uno)
-        l_temp = []
-
         for i in ITERADOR:
-            if f_uno <= i.clave <= f_dos:
-                conversion = [str(i.clave.date()), i.carga_util]
-                l_temp.append(conversion)
                 if i.carga_util > temp_max:
                     temp_max = i.carga_util
         return temp_max
@@ -65,14 +60,9 @@ class Temperaturas_DB:
     temperatura registrada. Se pasa por parámetro dos claves (fechas)."""
     def min_temp_rango(self,fecha1, fecha2):
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
-        f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         temp_min = self.mediciones.obtener(f_uno)
         Iter = Iterador(self.mediciones, f_uno)
-        l_temp = []
         for i in Iter:
-            if f_uno <= i.clave <= f_dos:
-                # conversion = [str(i.clave.date()), i.carga_util]
-                # l_temp.append(conversion)
                 if i.carga_util < temp_min:
                     temp_min = i.carga_util
         return temp_min
@@ -99,11 +89,9 @@ class Temperaturas_DB:
     medidas entre una fecha y otra."""
     def mostrar_temperaturas(self,fecha1,fecha2):
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
-        f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         Iter = Iterador(self.mediciones,f_uno)
         lista=[]
         for i in Iter:
-            if f_uno <= i.clave <= f_dos:
                 lista.append((str(i.clave.date()),i.valor))
         return(lista)
     
@@ -112,11 +100,12 @@ class Temperaturas_DB:
     def mostrar_cantidad_muestras(self):
         cantidad = self.tamano
         return cantidad
-        
+    
+#%%
 
 if __name__ == "__main__":
     obj=Temperaturas_DB()
-    print("Guardar Temperatura"), obj.guardar_temperatura("20/10/2022",30)
+    obj.guardar_temperatura("20/10/2022",30)
     obj.guardar_temperatura("21/09/2022",27)
     obj.guardar_temperatura("06/08/2022",26)
     obj.guardar_temperatura("29/10/2022",25)
@@ -125,12 +114,12 @@ if __name__ == "__main__":
     obj.guardar_temperatura("15/06/2022",12)
     obj.guardar_temperatura("19/07/2022",10)
     obj.guardar_temperatura("03/12/2022",5)
-    #----------------------------------------------------------------------
+
+    # ----------------------------------------------------------------------
     print("Delvolver temp",obj.devolver_temperatura("29/10/2022"))
     # -------------------------------------------------------------------
     print("MAX temp en un rango",obj.max_temp_rango("07/03/2022", "29/10/2022"))
-    #----------------------------------------------------------------------
-
+    # ----------------------------------------------------------------------
     print("MIN temp en un rango",obj.min_temp_rango("07/03/2022", "29/10/2022"))
     # -------------------------------------------------------------------
     print("Borrar temperatura"), obj.borrar_temperatura("29/10/2022")
@@ -138,7 +127,7 @@ if __name__ == "__main__":
     print("max y min en un rango",obj.temp_extremos_rango("07/03/2022", "29/10/2022"))
     # -------------------------------------------------------------------
     print("mostrar temps en un rango"),obj.mostrar_temperaturas("07/03/2022", "29/10/2022")
-    
+    # -------------------------------------------------------------------
     print("mostrar cantidad de muestras registradas", obj.mostrar_cantidad_muestras())
-    
+    # -------------------------------------------------------------------    
     print(obj) 

@@ -15,26 +15,28 @@ class TestTemperaturasDB(unittest.TestCase):
         self.fechamin = "21/10/2022"
         self.fechamax = "24/10/2022"
         self.fecha_temp = ("21/10/2022",24)
-        
+    """El método setUp() permite definir instrucciones que se ejecutarán
+    antes y después de cada método de prueba. Este será llamado 
+    automáticamente para cada prueba que sea ejecutada."""
     
     
+    """Se testea si el tamaño (int) de la base de datos es igual al que 
+    se incrementa en cada iteración. Este está definido en el setUp."""
     def test_guardar_temperatura(self):
         for fecha,temp in zip (self.lista_fecha,self.temperatura):
             self.temp.guardar_temperatura(fecha, temp)   
             self.cant_temp +=1
         self.assertEqual(self.temp.tamano, self.cant_temp)
-        #LISTO
+
 
 
     def test_devolver_temperatura(self):
-        
         self.temp.guardar_temperatura("21/10/2022",24)
         self.temp.guardar_temperatura("22/10/2022",27)
         self.temp.guardar_temperatura("23/10/2022",14)
         self.temp.guardar_temperatura("24/10/2022",10)
         dev = self.temp.devolver_temperatura("21/10/2022")
         self.assertEqual(self.fecha_temp[1],dev)
-        #LISTO
         
         
     def test_max_temp_rango(self):
@@ -45,7 +47,7 @@ class TestTemperaturasDB(unittest.TestCase):
         self.temp.guardar_temperatura("22/10/2022",27)
         self.temp.guardar_temperatura("23/10/2022",14)
         self.temp.guardar_temperatura("24/10/2022",10)
-        
+
         dev = self.temp.max_temp_rango(self.fechamin, self.fechamax)
         self.assertEqual(mayor, dev)
         
@@ -74,8 +76,8 @@ class TestTemperaturasDB(unittest.TestCase):
         self.temp.guardar_temperatura("22/10/2022",27)
         self.temp.guardar_temperatura("23/10/2022",14)
         self.temp.guardar_temperatura("24/10/2022",10)
-        temp = self.temp.temp_extremos_rango(self.fechamin, self.fechamax)
-        self.assertEqual(temp, (mini, mayor))
+        dev = self.temp.temp_extremos_rango(self.fechamin, self.fechamax)
+        self.assertEqual(dev, (mini, mayor))
 
 
     def test_borrar_temperatura(self):
@@ -84,7 +86,7 @@ class TestTemperaturasDB(unittest.TestCase):
         self.temp.guardar_temperatura("23/10/2022",14)
         self.temp.guardar_temperatura("24/10/2022",10)
         borrar = "23/10/2022"
-        temp = self.temp.borrar_temperatura(borrar)
+        self.temp.borrar_temperatura(borrar)
         buscar = self.temp.devolver_temperatura("23/10/2022")
         self.assertFalse(buscar)
         

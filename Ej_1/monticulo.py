@@ -1,4 +1,9 @@
 class MonticuloBinario:
+
+    def __init__(self):
+        self.lista_monticulo = [0]
+        self.tamano_actual = 0
+
     def __iter__(self):
         for i in self.lista_monticulo:
             yield i
@@ -9,9 +14,7 @@ class MonticuloBinario:
     def __len__(self):
         return self.tamano_actual
     
-    def __init__(self):
-        self.lista_monticulo = [0]
-        self.tamano_actual = 0
+
     
     def infilt_arriba(self,i):
         while i // 2 > 0:
