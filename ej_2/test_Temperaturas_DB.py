@@ -62,8 +62,8 @@ class TestTemperaturasDB(unittest.TestCase):
         
         dev = self.temp.min_temp_rango(self.fechamin, self.fechamax)
         self.assertEqual(mini, dev)
-        
-    
+
+
     
     def test_temp_extremos_rango(self):
         mini = 10
