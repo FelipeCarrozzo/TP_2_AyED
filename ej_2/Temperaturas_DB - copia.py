@@ -54,6 +54,8 @@ class Temperaturas_DB:
             if f_uno <= i.clave <= f_dos:
                 if i.carga_util > temp_max:
                     temp_max = i.carga_util
+            else:
+                break;
         return temp_max
     
     def min_temp_rango(self,fecha1, fecha2):
@@ -66,6 +68,8 @@ class Temperaturas_DB:
             if f_uno <= i.clave <= f_dos:
                 if i.carga_util < temp_min:
                     temp_min = i.carga_util
+            else:
+                break;
         return temp_min
     
     def temp_extremos_rango(self,fecha1,fecha2):
@@ -80,7 +84,7 @@ class Temperaturas_DB:
     
     """Método para mostrar la totalidad de temperaturas 
     medidas entre una fecha y otra."""
-    def mostrar_temperaturas_rango(self,fecha1,fecha2):
+    def mostrar_temperaturas(self,fecha1,fecha2):
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
         f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         Iter = Iterador(self.mediciones,f_uno)
@@ -96,29 +100,59 @@ class Temperaturas_DB:
         return cantidad
         
 
+
+
+# if __name__ == "__main__":
+#     obj=Temperaturas_DB()
+#     print("Guardar Temperatura"), obj.guardar_temperatura("20/10/2022",30)
+#     obj.guardar_temperatura("21/10/2022",27)
+#     obj.guardar_temperatura("22/10/2022",26)
+#     obj.guardar_temperatura("23/10/2022",25)
+#     obj.guardar_temperatura("24/10/2022",23)
+#     obj.guardar_temperatura("25/10/2022",22)
+#     obj.guardar_temperatura("26/10/2022",12)
+#     obj.guardar_temperatura("27/10/2022",3)
+#     obj.guardar_temperatura("28/10/2022",33)
+#     #----------------------------------------------------------------------
+#     print("Delvolver temp",obj.devolver_temperatura("25/10/2022"))
+#     # -------------------------------------------------------------------
+#     print("MAX temp en un rango",obj.max_temp_rango("20/10/2022", "28/10/2022"))
+#     print("MIN temp en un rango",obj.min_temp_rango("20/10/2022", "28/10/2022"))
+#     # -------------------------------------------------------------------
+#     print("Borrar temperatura"), obj.borrar_temperatura("25/10/2022")
+#     # -------------------------------------------------------------------
+#     print("max y min en un rango",obj.temp_extremos_rango("20/10/2022", "28/10/2022"))
+#     # -------------------------------------------------------------------
+#     print("mostrar temps en un rango"),obj.mostrar_temperaturas_rango("20/10/2022", "28/10/2022")
+    
 if __name__ == "__main__":
     obj=Temperaturas_DB()
-    print("Guardar Temperatura"), obj.guardar_temperatura("20/10/2022",30)
-    obj.guardar_temperatura("21/10/2022",27)
-    obj.guardar_temperatura("22/10/2022",26)
-    obj.guardar_temperatura("23/10/2022",25)
-    obj.guardar_temperatura("24/10/2022",23)
-    obj.guardar_temperatura("25/10/2022",22)
-    obj.guardar_temperatura("26/10/2022",12)
-    obj.guardar_temperatura("27/10/2022",3)
-    obj.guardar_temperatura("28/10/2022",33)
-    #----------------------------------------------------------------------
-    print("Delvolver temp",obj.devolver_temperatura("25/10/2022"))
+    obj.guardar_temperatura("20/10/2022",30)
+    obj.guardar_temperatura("21/09/2022",27)
+    obj.guardar_temperatura("06/08/2022",26)
+    obj.guardar_temperatura("29/10/2022",25)
+    obj.guardar_temperatura("07/03/2022",23)
+    obj.guardar_temperatura("09/01/2022",22)
+    obj.guardar_temperatura("15/06/2022",12)
+    obj.guardar_temperatura("19/07/2022",10)
+    obj.guardar_temperatura("03/12/2022",5)
+
+    # ----------------------------------------------------------------------
+    print("Delvolver temp",obj.devolver_temperatura("29/10/2022"))
     # -------------------------------------------------------------------
-    print("MAX temp en un rango",obj.max_temp_rango("20/10/2022", "28/10/2022"))
-    print("MIN temp en un rango",obj.min_temp_rango("20/10/2022", "28/10/2022"))
+    print("MAX temp en un rango",obj.max_temp_rango("07/03/2022", "29/10/2022"))
+    # ----------------------------------------------------------------------
+    print("MIN temp en un rango",obj.min_temp_rango("07/03/2022", "29/10/2022"))
     # -------------------------------------------------------------------
-    print("Borrar temperatura"), obj.borrar_temperatura("25/10/2022")
+    print("Borrar temperatura"), obj.borrar_temperatura("29/10/2022")
     # -------------------------------------------------------------------
-    print("max y min en un rango",obj.temp_extremos_rango("20/10/2022", "28/10/2022"))
+    print("max y min en un rango",obj.temp_extremos_rango("07/03/2022", "29/10/2022"))
     # -------------------------------------------------------------------
-    print("mostrar temps en un rango"),obj.mostrar_temperaturas_rango("20/10/2022", "28/10/2022")
-    
+    print("mostrar temps en un rango"),obj.mostrar_temperaturas("07/03/2022", "29/10/2022")
+    # -------------------------------------------------------------------
+    print("mostrar cantidad de muestras registradas", obj.mostrar_cantidad_muestras())
+    # -------------------------------------------------------------------    
+    print(obj) 
     
     
     

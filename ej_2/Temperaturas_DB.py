@@ -2,7 +2,6 @@ from ej_2.clases import ArbolAVL
 from ej_2.clases import Iterador
 from datetime import datetime 
 
-
 #%%
 
 class Temperaturas_DB:
