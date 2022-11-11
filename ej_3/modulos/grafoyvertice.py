@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Oct 26 14:13:52 2022
-
-@author: Juan Pablo
-"""
 from Ej_1.monticulo import MonticuloBinario
 from ej_3.modulos.monticulo_max import MonticuloBinarioMax
 
@@ -40,7 +34,10 @@ class Vertice:
     
     def asignar_predecesor(self, predecesor):
         self.predecesor = predecesor
-    
+
+
+#%%
+
 class Grafo:
     def __init__(self):
         self.lista_vertices = {}

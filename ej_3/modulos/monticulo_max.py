@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Nov  8 12:35:12 2022
-
-@author: Juan Pablo
-"""
-
 class MonticuloBinarioMax:
     def __init__(self):
         self.lista_monticulo = [0]
@@ -13,13 +6,14 @@ class MonticuloBinarioMax:
     def __iter__(self):
         for i in self.lista_monticulo:
             yield i
-        
+       
     def __str__(self):
         return str(self.lista_monticulo)
     
     def __len__(self):
         return self.tamano_actual
     
+
     def infilt_arriba(self,i):
         while i // 2 > 0:
           if self.lista_monticulo[i] > self.lista_monticulo[i // 2]:
