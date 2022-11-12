@@ -24,23 +24,29 @@ class Temperaturas_DB:
 
 #%%        
 
-    """Método que agrega a la base de datos una clave y un valor 
+    """
+    Método que agrega a la base de datos una clave y un valor 
     (en este caso, fecha y temperatura, respectivamente), los cuales
-    se pasan por parámetro."""
+    se pasan por parámetro.
+    """
     def guardar_temperatura(self,fecha,temperatura):
         convertir_fecha = datetime.strptime(fecha,"%d/%m/%Y")
         self.mediciones.agregar(convertir_fecha,temperatura)
         self.tamano += 1
         
-    """Método que retorna el valor (temperatura) en una fecha exacta.
-    Recibe por parámetro una clave (fecha)."""
+    """
+    Método que retorna el valor (temperatura) en una fecha exacta.
+    Recibe por parámetro una clave (fecha).
+    """
     def devolver_temperatura(self,fecha):
         convertir_fecha = datetime.strptime(fecha,"%d/%m/%Y")
         temp = self.mediciones.obtener(convertir_fecha)
         return temp
     
-    """Método que retorna, dentro de un rango de fechas, la máxima 
-    temperatura registrada. Se pasa por parámetro dos claves (fechas)."""        
+    """
+    Método que retorna, dentro de un rango de fechas, la máxima 
+    temperatura registrada. Se pasa por parámetro dos claves (fechas).
+    """
     def max_temp_rango(self,fecha1, fecha2):
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
         f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
@@ -56,8 +62,10 @@ class Temperaturas_DB:
         return temp_max
     
     
-    """Método que retorna, dentro de un rango de fechas, la mínima 
-    temperatura registrada. Se pasa por parámetro dos claves (fechas)."""
+    """
+    Método que retorna, dentro de un rango de fechas, la mínima 
+    temperatura registrada. Se pasa por parámetro dos claves (fechas).
+    """
     def min_temp_rango(self,fecha1, fecha2):
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
         f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
@@ -70,8 +78,10 @@ class Temperaturas_DB:
         return temp_min
     
     
-    """Método que devuelve la primer y última temperatura en un rango
-    de fecha. Se pasa por parámetro dos claves (fechas)"""
+    """
+    Método que devuelve la primer y última temperatura en un rango
+    de fecha. Se pasa por parámetro dos claves (fechas).
+    """
     def temp_extremos_rango(self,fecha1,fecha2):
         min_ = self.min_temp_rango(fecha1, fecha2)
         max_ = self.max_temp_rango(fecha1, fecha2)
@@ -79,16 +89,19 @@ class Temperaturas_DB:
         return min_,max_
     
     
-    """Método para borrar una temperatura (y por lo tanto una fecha) del
-    árbol. Se recibe por parametro la clave a borrar (fecha)"""        
+    """
+    Método para borrar una temperatura (y por lo tanto una fecha) del
+    árbol. Se recibe por parametro la clave a borrar (fecha)
+    """
     def borrar_temperatura(self,fecha):
         fecha_conv = datetime.strptime(fecha, "%d/%m/%Y")
         self.mediciones.eliminar(fecha_conv) 
         self.tamano -= 1
     
-    
-    """Método para mostrar la totalidad de temperaturas 
-    medidas entre una fecha y otra."""
+    """
+    Método para mostrar la totalidad de temperaturas 
+    medidas entre una fecha y otra.
+    """
     def mostrar_temperaturas(self,fecha1,fecha2):
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
         Iter = Iterador(self.mediciones,f_uno)
@@ -97,8 +110,10 @@ class Temperaturas_DB:
                 lista.append((str(i.clave.date()),i.valor))
         return(lista)
     
-    """Método que retorna un entero (int) que representa el
-    tamaño del árbol. No recibe ningún dato por parámetro."""
+    """
+    Método que retorna un entero (int) que representa el
+    tamaño del árbol. No recibe ningún dato por parámetro.
+    """
     def mostrar_cantidad_muestras(self):
         cantidad = self.tamano
         return cantidad

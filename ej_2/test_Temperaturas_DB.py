@@ -137,7 +137,6 @@ class TestTemperaturasDB(unittest.TestCase):
             self.cant_temp +=1
         self.assertEqual(self.temp.tamano, self.cant_temp)
 
-
 #%%
 if __name__ == "__main__":
     unittest.main()
