@@ -313,13 +313,13 @@ class ArbolAVL:
 class Iterador:
     def __init__(self, arbol, clave_inicio): 
         self.arbol = arbol 
-        self.nodo_inicio = arbol._obtener(clave_inicio, self.arbol.raiz)
+        self.nodo_inicio = arbol._obtener(clave_inicio, self.arbol.raiz) #dentro del árbol se busca la clave
 
     def __next__(self):
-        nodo_salida = self.nodo_inicio
-        if self.nodo_inicio == None:
+        nodo_salida = self.nodo_inicio #se guarda el nodo desde donde va a iterar
+        if self.nodo_inicio == None: #si el nodo no tiene ningun valor
             raise StopIteration
-        self.nodo_inicio = self.nodo_inicio.encontrarSucesor()
+        self.nodo_inicio = self.nodo_inicio.encontrarSucesor() # atualiza valor del nodo
         return nodo_salida
 
     def __iter__(self):
