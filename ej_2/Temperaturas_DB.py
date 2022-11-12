@@ -17,10 +17,8 @@ class Temperaturas_DB:
             lista.append([str(nodo.clave.date()), nodo.carga_util])
         return str(lista)
 
-    
     def __iter__(self):
         return str(self.mediciones)
-    
     
     def __len__(self):
         return len(self.mediciones)
@@ -46,12 +44,16 @@ class Temperaturas_DB:
     temperatura registrada. Se pasa por parámetro dos claves (fechas)."""        
     def max_temp_rango(self,fecha1, fecha2):
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
+        f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         temp_max = self.mediciones.obtener(f_uno)  #max_temp contiene la temperatura
         
         ITERADOR = Iterador(self.mediciones, f_uno)
         for i in ITERADOR:
+            if i.clave <= f_dos:
                 if i.carga_util > temp_max:
-                    temp_max = i.carga_util
+                    temp_max = i.carga_util 
+            else:
+                break
         return temp_max
     
     
@@ -59,9 +61,11 @@ class Temperaturas_DB:
     temperatura registrada. Se pasa por parámetro dos claves (fechas)."""
     def min_temp_rango(self,fecha1, fecha2):
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
+        f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         temp_min = self.mediciones.obtener(f_uno)
-        Iter = Iterador(self.mediciones, f_uno)
-        for i in Iter:
+        ITERADOR = Iterador(self.mediciones, f_uno)
+        for i in ITERADOR:
+            if i.clave <= f_dos:
                 if i.carga_util < temp_min:
                     temp_min = i.carga_util
         return temp_min

@@ -326,6 +326,8 @@ class Iterador:
         return self
     
 
+    
+#%%
 if __name__ == "__main__":
     mediciones = ArbolAVL()
     mediciones.agregar(date(2021,11,9),23)
