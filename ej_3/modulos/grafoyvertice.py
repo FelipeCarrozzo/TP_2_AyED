@@ -9,7 +9,7 @@ Created on Wed Oct 26 14:13:52 2022
 
 class MonticuloBinarioMax:
     def __init__(self):
-        self.lista_monticulo = [(0,0)]
+        self.lista_monticulo = [0,(0,0)]
         self.tamano_actual = 0
         
         
@@ -18,6 +18,7 @@ class MonticuloBinarioMax:
             yield i
         
     def __str__(self):
+       
         return str(self.lista_monticulo)
        
     
@@ -32,7 +33,7 @@ class MonticuloBinarioMax:
     
     def infilt_arriba(self,i):
         while i // 2 > 0:
-          if self.lista_monticulo[i][0] > self.lista_monticulo[i // 2][0]:
+          if self.lista_monticulo[i] > self.lista_monticulo[i // 2]:
              tmp = self.lista_monticulo[i // 2]
              self.lista_monticulo[i // 2] = self.lista_monticulo[i]
              self.lista_monticulo[i] = tmp
@@ -43,16 +44,8 @@ class MonticuloBinarioMax:
         self.tamano_actual = self.tamano_actual + 1
         self.infilt_arriba(self.tamano_actual) 
         
-    def eliminar_max(self):
-        valor_sacado = self.lista_monticulo[1][1]
-        self.lista_monticulo[1] = self.lista_monticulo[self.tamano_actual]
-        self.tamano_actual = self.tamano_actual - 1
-        self.lista_monticulo.pop()
-        self.infilt_abajo(1)
-        return valor_sacado
-    
     def esta_vacia(self):
-        if self.lista_monticulo == []:
+        if self.lista_monticulo == [0]:
             return True
         else:
             return False
@@ -60,7 +53,7 @@ class MonticuloBinarioMax:
     def infilt_abajo(self,i):
         while (i * 2) <= self.tamano_actual:
             hm = self.hijo_max(i)
-            if self.lista_monticulo[i][0] < self.lista_monticulo[hm][0]:
+            if self.lista_monticulo[i] < self.lista_monticulo[hm]:
                 tmp = self.lista_monticulo[i]
                 self.lista_monticulo[i] = self.lista_monticulo[hm]
                 self.lista_monticulo[hm] = tmp
@@ -70,10 +63,18 @@ class MonticuloBinarioMax:
         if i * 2 + 1 > self.tamano_actual:
             return i * 2
         else:
-            if self.lista_monticulo[i*2][0] > self.lista_monticulo[i*2+1][0]:
+            if self.lista_monticulo[i*2] > self.lista_monticulo[i*2+1]:
                 return i * 2
             else:
                 return i * 2 + 1
+            
+    def eliminar_max(self):
+        valor_sacado = self.lista_monticulo[1][1]
+        self.lista_monticulo[1] = self.lista_monticulo[self.tamano_actual]
+        self.tamano_actual = self.tamano_actual - 1
+        self.lista_monticulo.pop()
+        self.infilt_abajo(1)
+        return valor_sacado
             
     def construir_monticulo(self,unaLista):
         i = len(unaLista) // 2
@@ -83,22 +84,16 @@ class MonticuloBinarioMax:
             self.infilt_abajo(i)
             i = i - 1
             
-    def decrementar_clave(self, valor, nueva_clave):
-        hecho = False
-        i = 1
-        clave = 0
+    def decrementar_clave(self, vertice, nueva_distancia):
+        for i in range(1,self.tamano_actual):
+            if self.lista_monticulo[i][1].id == vertice.id:
+                self.lista_monticulo[i] = self.lista_monticulo[self.tamano_actual]
+                self.tamano_actual = self.tamano_actual - 1
+                self.lista_monticulo.pop()
+                self.infilt_abajo(1)
+                self.insertar((nueva_distancia, vertice))
         
-        '''Busco cada valor (Vertice)'''
-        while not hecho and i <= self.tamano_actual:
-            if self.lista_monticulo[i][1] == valor:
-                hecho = True
-                clave = i
-            else:
-                i = i + 1
         
-        if clave > 0:
-            self.lista_monticulo[clave] = (nueva_clave, self.lista_monticulo[clave][1])
-            self.infilt_arriba(clave)
 class Vertice:
     def __init__(self,clave,dist=0):
         self.id = clave
@@ -129,12 +124,18 @@ class Vertice:
     
     def asignar_predecesor(self, predecesor):
         self.predecesor = predecesor
+        
+    def __lt__(self, otro):
+        return True
     
 class Grafo:
     def __init__(self):
         self.lista_vertices = {}
         self.num_vertices = 0
-
+   
+    def __getitem__(self,clave):
+        return self.obtener_vertice(clave)
+    
     def agregar_vertice(self,clave):
         self.num_vertices = self.num_vertices + 1
         nuevo_vertice = Vertice(clave)
@@ -163,9 +164,7 @@ class Grafo:
     def __iter__(self):
         return iter(self.lista_vertices.values()) 
     
-    
-        
-    def dijkstra_de_max(un_grafo,inicio):
+    def dijkstra_de_max(self,un_grafo,inicio):
         """
         Esta función obtiene 
 
@@ -187,7 +186,6 @@ class Grafo:
         while not cp.esta_vacia():
             print(cp)
             vertice_actual = cp.eliminar_max()
-            
             
             for vertice_siguiente in vertice_actual.obtener_conexiones():
                 
@@ -228,23 +226,21 @@ if __name__ == "__main__":
     grafo.agregar_arista("c", "a", 3)
     grafo.agregar_arista("b", "d", 5)
     grafo.agregar_arista("e", "d", 5)
-    grafo.agregar_arista("a", "c", 8)
     grafo.agregar_arista("c", "e", 1)
 
-    print(grafo.obtener_vertice("a").obtener_ponderacion(grafo.obtener_vertice("b")))
-    vecinos = grafo.obtener_vertice("a").obtener_conexiones()
-    print("\n") 
-    print(grafo.obtener_vertice("b").obtener_distancia())
-    for v in vecinos:
-        print(v.id)
-    for i in grafo:
-        print(i)
+    # print(grafo.obtener_vertice("a").obtener_ponderacion(grafo.obtener_vertice("b")))
+    # vecinos = grafo.obtener_vertice("a").obtener_conexiones()
+    # print("\n") 
+    
+    # for i in grafo:
+    #     print(i)
         
     inicio=grafo.obtener_vertice("a")
+    # print(inicio)
     grafo.dijkstra_de_max(grafo,inicio)
     
     
     
-    for i in grafo:
-        print(i)
+    # for i in grafo:
+    #     print(i)
     
