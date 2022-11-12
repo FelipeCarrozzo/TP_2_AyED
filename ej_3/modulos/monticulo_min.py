@@ -1,3 +1,4 @@
+
 class MonticuloBinario:
     def __init__(self):
         self.lista_monticulo = [0]
