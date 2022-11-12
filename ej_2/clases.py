@@ -12,13 +12,13 @@ class NodoArbol:
     
    # def __str__(self):
    #      return str(self.clave) + str(self.valor)
-        # lista=[]
-        # for nodo in self:
-        #     lista.append([(nodo.clave.date()), nodo.carga_util])
-        # return str(lista) 
+   #      lista=[]
+   #      for nodo in self:
+   #          lista.append([(nodo.clave.date()), nodo.carga_util])
+   #      return str(lista) 
     
    # def __repr__(self):
-   #     return str(self)
+   #      return str(self)
        
         
    def __iter__(self):

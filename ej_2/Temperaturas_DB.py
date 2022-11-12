@@ -9,7 +9,6 @@ class Temperaturas_DB:
     def __init__(self):
         self.mediciones = ArbolAVL()
         self.tamano = 0
-
         
     def __str__(self):
         lista=[]

@@ -1,12 +1,15 @@
 import unittest 
 from ej_2.Temperaturas_DB import Temperaturas_DB
-import random
-from datetime import datetime
 
 
 class TestTemperaturasDB(unittest.TestCase):
     """Test de la clase Temperaturas_DB"""
     
+    """
+    El método setUp() permite definir instrucciones que se ejecutarán
+    antes y después de cada método de prueba. Este será llamado 
+    automáticamente para cada prueba que sea ejecutada.
+    """
     def setUp(self):
         self.temp = Temperaturas_DB()
         self.cant_temp = 0
@@ -15,13 +18,12 @@ class TestTemperaturasDB(unittest.TestCase):
         self.fechamin = "21/10/2022"
         self.fechamax = "24/10/2022"
         self.fecha_temp = ("21/10/2022",24)
-    """El método setUp() permite definir instrucciones que se ejecutarán
-    antes y después de cada método de prueba. Este será llamado 
-    automáticamente para cada prueba que sea ejecutada."""
+
     
-    
-    """Se testea si el tamaño (int) de la base de datos es igual al que 
-    se incrementa en cada iteración. Este está definido en el setUp."""
+    """
+    Se testea si el tamaño (int) de la base de datos es igual al que 
+    se incrementa en cada iteración (cant_temp). Este está definido en el setUp.
+    """
     def test_guardar_temperatura(self):
         for fecha,temp in zip (self.lista_fecha,self.temperatura):
             self.temp.guardar_temperatura(fecha, temp)   
@@ -29,11 +31,12 @@ class TestTemperaturasDB(unittest.TestCase):
         self.assertEqual(self.temp.tamano, self.cant_temp)
 
 
-    """Primeramente se define una variable "fecha_temp" (fecha, temperatura),
-    luego se guardan en la base de datos temperaturas y fechas. Se llama al 
-    método a testear, y se comprueba con assertEqual que el retorno del método 
-    (int) sea igual al segundo elemento de la variable "fecha_temp"(en este caso 
-    una temperatura (int))"""
+    """
+    Primeramente guardan en la base de datos temperaturas y fechas con el 
+    método "guardar_temperatura". Se llama al método a testear, y se comprueba
+    con assertEqual que el retorno del método (int) sea igual al segundo
+    elemento de la variable "fecha_temp"(en este caso una temperatura (int)).
+    """
     def test_devolver_temperatura(self):
         self.temp.guardar_temperatura("21/10/2022",24)
         self.temp.guardar_temperatura("22/10/2022",27)
@@ -42,9 +45,10 @@ class TestTemperaturasDB(unittest.TestCase):
         dev = self.temp.devolver_temperatura("21/10/2022")
         self.assertEqual(self.fecha_temp[1],dev)
         
-    
-    
-    """"""
+    """
+    Se testea que el retorno del método ""max_temp_rango" sea el mismo 
+    que la variable "mini" (en este caso 27).
+    """
     def test_max_temp_rango(self):
         mayor = 27
         self.fechamin = "21/10/2022"
@@ -56,9 +60,12 @@ class TestTemperaturasDB(unittest.TestCase):
 
         dev = self.temp.max_temp_rango(self.fechamin, self.fechamax)
         self.assertEqual(mayor, dev)
-        
-        
-        
+    
+    
+    """
+    Se testea que el retorno del método ""min_temp_rango" sea el mismo 
+    que la variable "mini" (en este caso 10).
+    """
     def test_min_temp_rango(self):
         mini = 10
         self.fechamin = "21/10/2022"
@@ -71,8 +78,10 @@ class TestTemperaturasDB(unittest.TestCase):
         dev = self.temp.min_temp_rango(self.fechamin, self.fechamax)
         self.assertEqual(mini, dev)
 
-
-    
+    """
+    Se testea que el método "temp_extremos_rango", retorne los mismos valores
+    definidos en el mismo test, "mini" y "mayor".
+    """
     def test_temp_extremos_rango(self):
         mini = 10
         mayor = 27
@@ -85,7 +94,13 @@ class TestTemperaturasDB(unittest.TestCase):
         dev = self.temp.temp_extremos_rango(self.fechamin, self.fechamax)
         self.assertEqual(dev, (mini, mayor))
 
-
+    """
+    Se testea que el método "borrar_temperatura" elimine de la base de datos
+    el nodo entero (clave y valor). Se utiliza la función "devolver_temperatura"
+    para buscar si la temperaura existe dentro de la base de datos o no. Se 
+    utiliza también assertFalsee, si este retorna false (bool) el test 
+    estará correcto.
+    """
     def test_borrar_temperatura(self):
         self.temp.guardar_temperatura("21/10/2022",24)
         self.temp.guardar_temperatura("22/10/2022",27)
@@ -96,6 +111,11 @@ class TestTemperaturasDB(unittest.TestCase):
         buscar = self.temp.devolver_temperatura("23/10/2022")
         self.assertFalse(buscar)
         
+    """
+    Se testea que el retorno del método "mostrar_temperaturas" devuelva
+    todas las temperaturas registradas en un rango de claves. Esta lista de
+    tuplas es comparada con "lista_temp", la cual tiene los mismos elementos.
+    """
     def test_mostrar_temperaturas(self):
         self.fechamin = "21/10/2022"
         self.fechamax = "24/10/2022"
@@ -107,8 +127,17 @@ class TestTemperaturasDB(unittest.TestCase):
         self.temp.guardar_temperatura("24/10/2022",10)
         dev = self.temp.mostrar_temperaturas(self.fechamin, self.fechamax)
         self.assertEqual(dev,(self.lista_temp))
-        
-    # def test
+    """
+    Se testea si el tamaño (int) de la base de datos es igual al que se
+    incrementa en cada iteración (cant_temp). Este está definido en el setUp.
+    """
+    def test_mostrar_cantidad_muestras(self):
+        for fecha,temp in zip (self.lista_fecha,self.temperatura):
+            self.temp.guardar_temperatura(fecha, temp)   
+            self.cant_temp +=1
+        self.assertEqual(self.temp.tamano, self.cant_temp)
 
+
+#%%
 if __name__ == "__main__":
     unittest.main()
