@@ -1,5 +1,5 @@
 import unittest 
-from ej_2.Temperaturas_DB import Temperaturas_DB
+from ej_2.modulos.Temperaturas_DB import Temperaturas_DB
 
 
 class TestTemperaturasDB(unittest.TestCase):

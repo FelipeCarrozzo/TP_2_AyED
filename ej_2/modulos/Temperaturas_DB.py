@@ -1,5 +1,5 @@
-from ej_2.clases import ArbolAVL
-from ej_2.clases import Iterador
+from ej_2.modulos.clases import ArbolAVL
+from ej_2.modulos.clases import Iterador
 from datetime import datetime 
 
 #%%
