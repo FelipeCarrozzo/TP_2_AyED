@@ -1,5 +1,4 @@
-# from Ej_1.monticulo import MonticuloBinario
-# from ej_3.modulos.monticulo_max import MonticuloBinarioMax
+from Trabajo_Practico2.ej_3.modulos.monticulo_min import MonticuloBinarioMin
 
 class MonticuloBinarioMax:
     def __init__(self):
@@ -78,15 +77,22 @@ class MonticuloBinarioMax:
             self.infilt_abajo(i)
             i = i - 1
             
-    def decrementar_clave(self, vertice, nueva_distancia):
-        for i in range(1,self.tamano_actual):
-            if self.lista_monticulo[i][1].id == vertice.id:
-                self.lista_monticulo[i] = self.lista_monticulo[self.tamano_actual]
-                self.tamano_actual = self.tamano_actual - 1
-                self.lista_monticulo.pop()
-                self.infilt_abajo(1)
-                self.insertar((nueva_distancia, vertice))
+    def decrementar_clave(self, valor, nueva_clave):
+        hecho = False
+        i = 1
+        clave = 0
         
+        '''Busco cada valor (Vertice)'''
+        while not hecho and i <= self.tamano_actual:
+            if self.lista_monticulo[i][1] == valor:
+                hecho = True
+                clave = i
+            else:
+                i = i + 1
+        
+        if clave > 0:
+            self.lista_monticulo[clave] = (nueva_clave, self.lista_monticulo[clave][1])
+            self.infilt_arriba(clave)
         
 class Vertice:
     def __init__(self,clave,dist=0):
@@ -178,7 +184,7 @@ class Grafo:
         inicio.asignar_distancia(9999)
         cp.construir_monticulo([(v.obtener_distancia(),v) for v in un_grafo])
         while not cp.esta_vacia():
-            print(cp)
+            
             vertice_actual = cp.eliminar_max()
             
             for vertice_siguiente in vertice_actual.obtener_conexiones():
@@ -191,20 +197,27 @@ class Grafo:
                     cp.decrementar_clave(vertice_siguiente,nueva_distancia)
                         
                     
-    # def dijkstra(un_grafo,inicio):
-    #     cp = ColaPrioridad()
-    #     inicio.asignar_distancia(0)
-    #     cp.construir_monticulo([(v.obtener_distancia(),v) for v in unGrafo])
-    #     while not cp.estaVacia():
-    #         vertice_actual = cp.eliminarMin()
-    #         for vertice_siguiente in vertice_actual.obtener_conexiones():
-    #             nueva_distancia = vertice_actual.obtener_distancia() \
-    #                     + vertice_actual.obtener_ponderacion(vertice_siguiente)
-    #             if nueva_distancia < vertice_siguiente.obtener_distancia():
-    #                 vertice_siguiente.asignar_distancia( nueva_distancia )
-    #                 vertice_siguiente.asignar_predecesor(vertice_actual)
-    #                 cp.decrementarClave(vertice_siguiente,nueva_distancia)
-    
+    def dijkstra_de_min(self,un_grafo,inicio):
+        cp = MonticuloBinarioMin()
+
+        cp.construir_monticulo([(v.obtener_distancia(),v) for v in un_grafo])
+        for vertice in un_grafo:
+            vertice.asignar_distancia(9999)
+        
+        inicio.asignar_distancia(0)
+        while not cp.esta_vacia():
+            
+            vertice_actual = cp.eliminar_min()
+            
+            for vertice_siguiente in vertice_actual.obtener_conexiones():
+                
+                nueva_distancia = vertice_actual.obtener_distancia() + vertice_actual.obtener_ponderacion(vertice_siguiente)
+                
+                if nueva_distancia < vertice_siguiente.obtener_distancia():    
+                    vertice_siguiente.asignar_distancia(nueva_distancia)
+                    vertice_siguiente.asignar_predecesor(vertice_actual)
+                    cp.decrementar_clave(vertice_siguiente,nueva_distancia)
+                
 if __name__ == "__main__":
     
     grafo = Grafo()
@@ -226,15 +239,15 @@ if __name__ == "__main__":
     # vecinos = grafo.obtener_vertice("a").obtener_conexiones()
     # print("\n") 
     
-    # for i in grafo:
-    #     print(i)
+    for i in grafo:
+        print(i)
         
     inicio=grafo.obtener_vertice("a")
     # print(inicio)
-    grafo.dijkstra_de_max(grafo,inicio)
+    grafo.dijkstra_de_min(grafo,inicio)
     
     
     
-    # for i in grafo:
-    #     print(i)
+    for i in grafo:
+        print(i.dist)
     

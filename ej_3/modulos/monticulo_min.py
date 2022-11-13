@@ -1,7 +1,7 @@
 
-class MonticuloBinario:
+class MonticuloBinarioMin:
     def __init__(self):
-        self.lista_monticulo = [0]
+        self.lista_monticulo = [0,(0,0)]
         self.tamano_actual = 0
     
 
@@ -29,12 +29,12 @@ class MonticuloBinario:
         self.infilt_arriba(self.tamano_actual) 
         
     def eliminar_min(self):
-        valorSacado = self.lista_monticulo[1]
+        valor_sacado = self.lista_monticulo[1][1]
         self.lista_monticulo[1] = self.lista_monticulo[self.tamano_actual]
         self.tamano_actual = self.tamano_actual - 1
         self.lista_monticulo.pop()
         self.infilt_abajo(1)
-        return valorSacado
+        return valor_sacado
     
     def infilt_abajo(self,i):
         while (i * 2) <= self.tamano_actual:
@@ -53,15 +53,39 @@ class MonticuloBinario:
                 return i * 2
             else:
                 return i * 2 + 1
-    def construir_monticulo(self,unaLista):
-        i = len(unaLista) // 2
-        self.tamanoActual = len(unaLista)
-        self.listaMonticulo = [0] + unaLista[:]
+    def construir_monticulo(self,una_lista):
+        i = len(una_lista) // 2
+        self.tamano_actual = len(una_lista)
+        self.lista_monticulo = [0] + una_lista[:]
         while (i > 0):
-            self.infiltAbajo(i)
+            self.infilt_abajo(i)
             i = i - 1
-
-
     
+    def esta_vacia(self):
+        if self.lista_monticulo == [0]:
+            return True
+        else:
+            return False
+        
+    def __lt__(self, otro):
+        return True
+    
+    def decrementar_clave(self, valor, nueva_clave):
+        hecho = False
+        i = 1
+        clave = 0
+        
+        '''Busco cada valor (Vertice)'''
+        while not hecho and i <= self.tamano_actual:
+            if self.lista_monticulo[i][1] == valor:
+                hecho = True
+                clave = i
+            else:
+                i = i + 1
+        
+        if clave > 0:
+            self.lista_monticulo[clave] = (nueva_clave, self.lista_monticulo[clave][1])
+            self.infilt_arriba(clave)
+        
     
     
