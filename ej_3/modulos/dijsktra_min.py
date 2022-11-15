@@ -4,7 +4,7 @@ Created on Sun Nov 13 15:01:49 2022
 
 @author: Juan Pablo
 """
-from Trabajo_Practico2.ej_3.modulos.monticulo_min import MonticuloBinarioMin
+from ej_3.modulos.monticulo_min import MonticuloBinarioMin
 
 def dijkstra_min(un_grafo,inicio):
     cp = MonticuloBinarioMin()

@@ -4,9 +4,9 @@ Created on Sun Nov 13 15:12:21 2022
 
 @author: Juan Pablo
 """
-from Trabajo_Practico2.ej_3.modulos.dijsktra_max import dijkstra_max
-from Trabajo_Practico2.ej_3.modulos.dijsktra_min import dijkstra_min
-from Trabajo_Practico2.ej_3.modulos.grafoyvertice import Grafo
+from ej_3.modulos.dijsktra_max import dijkstra_max
+from ej_3.modulos.dijsktra_min import dijkstra_min
+from ej_3.modulos.grafoyvertice import Grafo
 
 with open ("rutas.txt", "r") as rutas:
     ciudades = []
