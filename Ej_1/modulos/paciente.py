@@ -41,5 +41,5 @@ class Paciente:
         return self.__descripcion
 
 if __name__ == "__main__":
-    obj = Paciente(1)
+    obj = Paciente(90)
     print(obj)

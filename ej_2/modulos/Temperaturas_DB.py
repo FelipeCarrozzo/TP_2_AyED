@@ -74,7 +74,9 @@ class Temperaturas_DB:
         for i in ITERADOR:
             if i.clave <= f_dos:
                 if i.carga_util < temp_min:
-                    temp_min = i.carga_util
+                    temp_min = i.valor 
+            else:
+                break
         return temp_min
     
     

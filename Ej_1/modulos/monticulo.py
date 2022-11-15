@@ -20,7 +20,12 @@ class MonticuloBinario:
         return self.tamano_actual
     
 
-    
+    """
+    Método "infilt_arriba" para recuperar la propiedad de montículo comparando
+    el ítem recién agregado con su padre. Si el ítem recién agregado es menor
+    que su padre, entonces podemos intercambiar el ítem con su padre.
+    Recibe por parámetro un int.
+    """
     def infilt_arriba(self,i):
         while i // 2 > 0:
           if self.lista_monticulo[i] < self.lista_monticulo[i // 2]:
@@ -29,18 +34,33 @@ class MonticuloBinario:
              self.lista_monticulo[i] = tmp
           i = i // 2 
     
+    """
+    Método "insertar"  para agregar un ítem a una lista.Añade el elemento
+    al final de la lista. Esto garantiza que se mantendrá la propiedad de
+    estructura completa del árbol.
+    Recibe por parámetro un elemento
+    """
     def insertar(self,k):
         self.lista_monticulo.append(k)
         self.tamano_actual = self.tamano_actual + 1
         self.infilt_arriba(self.tamano_actual) 
         
+    """
+    Método "eliminar_min" para eliminar la raíz. Este es el elemento
+    mas pequeño.
+    No recibe parametros. 
+    """
     def eliminar_min(self):
-        valorSacado = self.lista_monticulo[1]
-        self.lista_monticulo[1] = self.lista_monticulo[self.tamano_actual]
-        self.tamano_actual = self.tamano_actual - 1
+        valorSacado = self.lista_monticulo[1] #toma la raíz
+        self.lista_monticulo[1] = self.lista_monticulo[self.tamano_actual] #llevo el último elemento insertado a la raíz (temporalmente)
+        self.tamano_actual = self.tamano_actual - 1 #se descuenta un elemento
         self.lista_monticulo.pop()
         self.infilt_abajo(1)
         return valorSacado
+    
+    """
+    
+    """
     
     def infilt_abajo(self,i):
         while (i * 2) <= self.tamano_actual:
