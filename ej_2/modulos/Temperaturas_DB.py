@@ -30,7 +30,6 @@ class Temperaturas_DB:
 
 #%%        
 
-
     def guardar_temperatura(self,fecha,temperatura):
         """
         Método que agrega a la base de datos una clave y un valor 
@@ -69,7 +68,6 @@ class Temperaturas_DB:
             else:
                 break
         return temp_max
-    
     
 
     def min_temp_rango(self,fecha1, fecha2):
@@ -122,7 +120,7 @@ class Temperaturas_DB:
         Iter = Iterador(self.mediciones,f_uno)
         lista=[]
         for i in Iter:
-            if f_uno <= i.clave <= f_dos:
+            if i.clave <= f_dos:
                 lista.append((str(i.clave.date()),i.valor))
         return(lista) 
     
@@ -163,7 +161,7 @@ if __name__ == "__main__":
     print("max y min en un rango",obj.temp_extremos_rango("07/03/2022", "29/10/2022"))
     # -------------------------------------------------------------------
     print("mostrar temps en un rango:") 
-    print(obj.mostrar_temperaturas("07/03/2022", "19/07/2022"))
+    print(obj.mostrar_temperaturas("07/03/2022", "20/10/2022"))
     # -------------------------------------------------------------------
     print("mostrar cantidad de muestras registradas:", obj.mostrar_cantidad_muestras())
     # -------------------------------------------------------------------    

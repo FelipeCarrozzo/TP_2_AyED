@@ -8,7 +8,7 @@ class MonticuloBinario:
         inicializa un contador en cero. Este se va a ir incrementando en el 
         caso de que se agregue un nodo, y decrementará cuando se elimine un nodo.
         """
-        self.lista_monticulo = [0] #el 1er elemento del monticulo simepre se inicializa con cero
+        self.lista_monticulo = [0] #el 1er elemento del monticulo simepre se inicializa con cero, cla de prioridad
         self.tamano_actual = 0
 
     def __iter__(self):
