@@ -1,99 +1,7 @@
-from ej_3.modulos.monticulo_min import MonticuloBinarioMin
+from Trabajo_Practico2.ej_3.modulos.monticulo_min import MonticuloBinarioMin
+from Trabajo_Practico2.ej_3.modulos.dijsktra_max import dijkstra_de_pmax
+from Trabajo_Practico2.ej_3.modulos.dijsktra_min import dijkstra_de_min
 
-class MonticuloBinarioMax:
-    def __init__(self):
-        self.lista_monticulo = [0,(0,0)]
-        self.tamano_actual = 0
-        
-        
-    def __iter__(self):
-        for i in self.lista_monticulo:
-            yield i
-        
-    def __str__(self):
-       
-        return str(self.lista_monticulo)
-       
-    
-    def __len__(self):
-        return self.tamano_actual
-    
-    def __contains__(self, vertice):
-        for par in self.lista_monticulo:
-            if par[1] == vertice:
-                return True
-            return False
-    
-    def infilt_arriba(self,i):
-        while i // 2 > 0:
-          if self.lista_monticulo[i] > self.lista_monticulo[i // 2]:
-             tmp = self.lista_monticulo[i // 2]
-             self.lista_monticulo[i // 2] = self.lista_monticulo[i]
-             self.lista_monticulo[i] = tmp
-          i = i // 2 
-    
-    def insertar(self,k):
-        self.lista_monticulo.append(k)
-        self.tamano_actual = self.tamano_actual + 1
-        self.infilt_arriba(self.tamano_actual) 
-        
-    def esta_vacia(self):
-        if self.lista_monticulo == [0]:
-            return True
-        else:
-            return False
-    
-    def infilt_abajo(self,i):
-        while (i * 2) <= self.tamano_actual:
-            hm = self.hijo_max(i)
-            if self.lista_monticulo[i] < self.lista_monticulo[hm]:
-                tmp = self.lista_monticulo[i]
-                self.lista_monticulo[i] = self.lista_monticulo[hm]
-                self.lista_monticulo[hm] = tmp
-            i = hm
-            
-    def hijo_max(self,i):
-        if i * 2 + 1 > self.tamano_actual:
-            return i * 2
-        else:
-            if self.lista_monticulo[i*2] > self.lista_monticulo[i*2+1]:
-                return i * 2
-            else:
-                return i * 2 + 1
-            
-    def eliminar_max(self):
-        valor_sacado = self.lista_monticulo[1][1]
-        self.lista_monticulo[1] = self.lista_monticulo[self.tamano_actual]
-        self.tamano_actual = self.tamano_actual - 1
-        self.lista_monticulo.pop()
-        self.infilt_abajo(1)
-        return valor_sacado
-            
-    def construir_monticulo(self,unaLista):
-        i = len(unaLista) // 2
-        self.tamano_actual = len(unaLista)
-        self.lista_monticulo = [0] + unaLista[:]
-        while (i > 0):
-            self.infilt_abajo(i)
-            i = i - 1
-            
-    def decrementar_clave(self, valor, nueva_clave):
-        hecho = False
-        i = 1
-        clave = 0
-        
-        '''Busco cada valor (Vertice)'''
-        while not hecho and i <= self.tamano_actual:
-            if self.lista_monticulo[i][1] == valor:
-                hecho = True
-                clave = i
-            else:
-                i = i + 1
-        
-        if clave > 0:
-            self.lista_monticulo[clave] = (nueva_clave, self.lista_monticulo[clave][1])
-            self.infilt_arriba(clave)
-        
 class Vertice:
     def __init__(self,clave,dist=0):
         self.id = clave
@@ -164,62 +72,10 @@ class Grafo:
     def __iter__(self):
         return iter(self.lista_vertices.values()) 
     
-    def dijkstra_de_max(self,un_grafo,inicio):
-        """
-        Esta función obtiene 
 
-        Parameters
-        ----------
-        un_grafo : TYPE
-            DESCRIPTION.
-        inicio : TYPE
-            DESCRIPTION.
-
-        Returns
-        -------
-        None.
-
-        """
-        cp = MonticuloBinarioMax()
-        inicio.asignar_distancia(9999)
-        cp.construir_monticulo([(v.obtener_distancia(),v) for v in un_grafo])
-        while not cp.esta_vacia():
-            
-            vertice_actual = cp.eliminar_max()
-            
-            for vertice_siguiente in vertice_actual.obtener_conexiones():
-                
-                nueva_distancia = min(vertice_actual.obtener_distancia(),vertice_actual.obtener_ponderacion(vertice_siguiente))
-                
-                if nueva_distancia > vertice_siguiente.obtener_distancia():    
-                    vertice_siguiente.asignar_distancia(nueva_distancia)
-                    vertice_siguiente.asignar_predecesor(vertice_actual)
-                    cp.decrementar_clave(vertice_siguiente,nueva_distancia)
-                        
-                    
-    def dijkstra_de_min(self,un_grafo,inicio):
-        cp = MonticuloBinarioMin()
-
-        cp.construir_monticulo([(v.obtener_distancia(),v) for v in un_grafo])
-        for vertice in un_grafo:
-            vertice.asignar_distancia(9999)
-        
-        inicio.asignar_distancia(0)
-        while not cp.esta_vacia():
-            
-            vertice_actual = cp.eliminar_min()
-            
-            for vertice_siguiente in vertice_actual.obtener_conexiones():
-                
-                nueva_distancia = vertice_actual.obtener_distancia() + vertice_actual.obtener_ponderacion(vertice_siguiente)
-                
-                if nueva_distancia < vertice_siguiente.obtener_distancia():    
-                    vertice_siguiente.asignar_distancia(nueva_distancia)
-                    vertice_siguiente.asignar_predecesor(vertice_actual)
-                    cp.decrementar_clave(vertice_siguiente,nueva_distancia)
-                
 if __name__ == "__main__":
     
+    """ PRUEBAS """
     grafo = Grafo()
     
     # grafo.agregar_vertice('a')
@@ -231,9 +87,9 @@ if __name__ == "__main__":
     grafo.agregar_arista("a", "e", 7)
     grafo.agregar_arista("b", "e", 5)
     grafo.agregar_arista("c", "a", 3)
-    grafo.agregar_arista("b", "d", 5)
-    grafo.agregar_arista("e", "d", 5)
-    grafo.agregar_arista("c", "e", 1)
+    grafo.agregar_arista("b", "c", 5)
+    grafo.agregar_arista("e", "a", 5)
+    grafo.agregar_arista("d", "e", 1)
 
     # print(grafo.obtener_vertice("a").obtener_ponderacion(grafo.obtener_vertice("b")))
     # vecinos = grafo.obtener_vertice("a").obtener_conexiones()
@@ -244,7 +100,7 @@ if __name__ == "__main__":
         
     inicio=grafo.obtener_vertice("a")
     # print(inicio)
-    grafo.dijkstra_de_min(grafo,inicio)
+    dijkstra_de_min(grafo,inicio)
     
     
     

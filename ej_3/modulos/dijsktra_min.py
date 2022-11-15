@@ -1,25 +1,38 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 13 15:01:49 2022
+from Trabajo_Practico2.ej_3.modulos.monticulo_min import MonticuloBinarioMin
 
-@author: Juan Pablo
-"""
-from ej_3.modulos.monticulo_min import MonticuloBinarioMin
+def dijkstra_de_min(un_grafo,inicio):
+    """
+    Esta función devuelve un grafo con los costos mínimos de viajar desde
+    una ciudad inicio hacia las demas del grafo.
 
-def dijkstra_min(un_grafo,inicio):
-    cp = MonticuloBinarioMin()
+    Parameters
+    ----------
+    un_grafo : TYPE: Grafo
+        Un grafo con las aristas(caminos), los vertices(ciudades) y ponderaciones(costos por ruta).
+    inicio : TYPE: Vertice
+        Un vertice(ciudad) inicial desde donde se quiere viajar.
+
+    Returns
+    -------
+    None.
+
+    """
+    cp = MonticuloBinarioMin()         
     
-    cp.construir_monticulo([(v.obtener_distancia(),v) for v in un_grafo])
-    for vertice in cp:
-        vertice.asignar_distancia(99999)
+    for vertice in un_grafo:
+        vertice.asignar_distancia(9999)
     inicio.asignar_distancia(0)
+    cp.construir_monticulo([(v.obtener_distancia(),v) for v in un_grafo])
+    
+    
+    
     while not cp.esta_vacia():
         
         vertice_actual = cp.eliminar_min()
         
         for vertice_siguiente in vertice_actual.obtener_conexiones():
             
-            nueva_distancia = vertice_actual.obtener_distancia + vertice_actual.obtener_ponderacion(vertice_siguiente)
+            nueva_distancia = vertice_actual.obtener_distancia() + vertice_actual.obtener_ponderacion(vertice_siguiente)
             
             if nueva_distancia < vertice_siguiente.obtener_distancia():    
                 vertice_siguiente.asignar_distancia(nueva_distancia)

@@ -1,16 +1,17 @@
 from ej_3.modulos.monticulo_max import MonticuloBinarioMax
-from ej_3.modulos.grafoyvertice import Grafo, Vertice
   
-def dijkstra_max(self,un_grafo,inicio):
+def dijkstra_de_pmax(un_grafo,inicio):
     """
-    Esta función obtiene 
+    Esta función devuelve un grafo con los pesos máximo transportables
+    desde una ciudad inicio a las demás del grafo.
+    
 
     Parameters
     ----------
-    un_grafo : TYPE
-        DESCRIPTION.
-    inicio : TYPE
-        DESCRIPTION.
+    un_grafo : TYPE: Grafo
+        Un grafo con las aristas(caminos), los vertices(ciudades) y ponderaciones(capacidad de peso por ruta).
+    inicio : TYPE: Vertice
+        Un vertice(ciudad) inicial desde donde se quiere viajar.
 
     Returns
     -------

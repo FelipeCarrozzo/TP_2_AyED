@@ -1,12 +1,13 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 13 15:12:21 2022
+""" ----> Importarción de los modulos <---- """
 
-@author: Juan Pablo
-"""
-from ej_3.modulos.dijsktra_max import dijkstra_max
-from ej_3.modulos.dijsktra_min import dijkstra_min
-from ej_3.modulos.grafoyvertice import Grafo
+
+from Trabajo_Practico2.ej_3.modulos.dijsktra_max import dijkstra_de_pmax
+from Trabajo_Practico2.ej_3.modulos.dijsktra_min import dijkstra_de_min
+from Trabajo_Practico2.ej_3.modulos.grafoyvertice import Grafo
+
+
+""" ----> Lectura del archivo y almacenamiento de datos <---- """
+
 
 with open ("rutas.txt", "r") as rutas:
     ciudades = []
@@ -21,72 +22,75 @@ with open ("rutas.txt", "r") as rutas:
             ciudades.append(de)
         if a not in ciudades:
             ciudades.append(a)
-        
-    
-   
 
-    
-    print("Partiendo de Buenos Aires:", "\n", "De la siguiente lista de ciudades, seleccione una para conocer su máximo cuello de botella y el camino con menor costo de transporte.", "\n",ciudades)
-    destino= input("Ingrese la ciudad destino:")
-    
-    #Dijkstra Peso Máx.
 
-    grafo_ciudades_peso = Grafo()
-        
-    for i in range(len(ciudades)):
-        
-        grafo_ciudades_peso.agregar_arista(datos_ciudades[i][0],datos_ciudades[i][1],datos_ciudades[i][2]) 
+""" ----> Solicitud del destino a analizar <---- """     
     
-    for i in grafo_ciudades_peso:
-        print(i.id, i.dist)
+
+print("Partiendo desede Ciudad De Buenos Aires:", "\n", "De la siguiente lista de destinos, seleccione uno para conocer su máximo cuello de botella y el camino con menor costo de transporte.", "\n",ciudades[1:])
+destino= input("Ingrese la ciudad destino:")
+
+
+""" ----> Implementación del máximo cuello de botella <---- """ 
+
+
+grafo_ciudades_peso = Grafo()
     
-    print("\n","----------------", "\n")
+for i in range(len(datos_ciudades)):
     
-    grafo_ciudades_peso.dijkstra_de_max(grafo_ciudades_peso,grafo_ciudades_peso.obtener_vertice("CiudadBs.As."))
+    grafo_ciudades_peso.agregar_arista(datos_ciudades[i][0],datos_ciudades[i][1],datos_ciudades[i][2]) 
+
+for i in grafo_ciudades_peso:
+    print(i.id, i.dist)
+
+print("\n","----------------", "\n")
+
+dijkstra_de_pmax(grafo_ciudades_peso,grafo_ciudades_peso.obtener_vertice("CiudadBs.As."))
+
+print("\n","----------------", "\n")
+
+for i in grafo_ciudades_peso:
+    print(i.id, i.dist)
     
-    print("\n","----------------", "\n")
+print("\n","----------------", "\n")
+
+peso = 0                            # En la variable peso se guarda la capacidad máxima de peso transportable del destino seleccionado
+for i in grafo_ciudades_peso:
+    if i.id == destino:
+        peso = i.dist
     
-    for i in grafo_ciudades_peso:
-        print(i.id, i.dist)
-        
-    print("\n","----------------", "\n")
     
-    peso = 0
-    for i in grafo_ciudades_peso:
-        if i.id == destino:
-            peso = i.dist
-            
-            
-    #Dijkstra Costos Min
+""" ----> Implementación del costo mínimo de transporte entre los caminos que tienen la misma o una mayor capacidad de peso a transportar <---- """         
+
+
+grafo_ciudades_costo = Grafo()
     
-    grafo_ciudades_costo = Grafo()
-        
-    for i in range(len(ciudades)):
-        
+for i in range(len(datos_ciudades)):
+    if datos_ciudades[i][2] >= peso:
         grafo_ciudades_costo.agregar_arista(datos_ciudades[i][0],datos_ciudades[i][1],datos_ciudades[i][3]) 
+
+for i in grafo_ciudades_costo:
+    print(i.id, i.dist)
+
+print("\n","----------------", "\n")
+
+dijkstra_de_min(grafo_ciudades_costo,grafo_ciudades_costo.obtener_vertice("CiudadBs.As."))
+
+print("\n","----------------", "\n")
+
+for i in grafo_ciudades_costo:
+    print(i.id, i.dist)
     
-    for i in grafo_ciudades_costo:
-        print(i.id, i.dist)
-    
-    print("\n","----------------", "\n")
-    
-    grafo_ciudades_costo.dijkstra_de_min(grafo_ciudades_costo,grafo_ciudades_costo.obtener_vertice("CiudadBs.As."))
-    
-    print("\n","----------------", "\n")
-    
-    for i in grafo_ciudades_costo:
-        print(i.id, i.dist)
-        
-    print("\n","----------------", "\n")
-    
-    costo = 0
-    for i in grafo_ciudades_costo:
-        if i.id == destino:
-            costo = i.dist
-            
-    
-    #Mostrar Resultados        
-    print("Para llegar a", destino,":", "\n", 
-          "El peso máximo para transportar es:", peso, "\n",
-          "El costo mínimo de transporte es:", costo)
-    
+print("\n","----------------", "\n")
+
+costo = 0                            # En la variable costo se guarda el costo mínimo de transporte
+for i in grafo_ciudades_costo:
+    if i.id == destino:
+        costo = i.dist        
+
+""" ----> Se muestran los resultados <---- """  
+
+     
+print("Para llegar a", destino,":", "\n", 
+      "El peso máximo para transportar es:", peso,"kg", "\n",
+      "El costo mínimo de transporte es:","${costo: .3f}".format(costo=costo ))

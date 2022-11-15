@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Nov  8 12:35:12 2022
-
-@author: Juan Pablo
-"""
-
 class MonticuloBinarioMax:
     def __init__(self):
         self.lista_monticulo = [0]
