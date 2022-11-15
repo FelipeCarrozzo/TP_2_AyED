@@ -9,7 +9,7 @@ from ej_3.modulos.grafoyvertice import Grafo
 """ ----> Lectura del archivo y almacenamiento de datos <---- """
 
 
-with open ("rutas.txt", "r") as rutas:
+with open ("C:/Users/usr/Documents/TP2_AyED/ej_3/aplicaciones/rutas.txt", "r") as rutas:
     ciudades = []
     datos_ciudades = []
     for ruta in rutas:
@@ -43,16 +43,16 @@ for i in range(len(datos_ciudades)):
 for i in grafo_ciudades_peso:
     print(i.id, i.dist)
 
-print("\n","----------------", "\n")
+print("/n","----------------", "/n")
 
 dijkstra_de_pmax(grafo_ciudades_peso,grafo_ciudades_peso.obtener_vertice("CiudadBs.As."))
 
-print("\n","----------------", "\n")
+print("/n","----------------", "/n")
 
 for i in grafo_ciudades_peso:
     print(i.id, i.dist)
     
-print("\n","----------------", "\n")
+print("/n","----------------", "/n")
 
 peso = 0                            # En la variable peso se guarda la capacidad máxima de peso transportable del destino seleccionado
 for i in grafo_ciudades_peso:
