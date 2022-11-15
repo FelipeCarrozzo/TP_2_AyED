@@ -9,7 +9,7 @@ from ej_3.modulos.grafoyvertice import Grafo
 """ ----> Lectura del archivo y almacenamiento de datos <---- """
 
 
-with open ("C:/Users/usr/Documents/TP2_AyED/ej_3/aplicaciones/rutas.txt", "r") as rutas:
+with open ("rutas.txt", "r") as rutas:
     ciudades = []
     datos_ciudades = []
     for ruta in rutas:
