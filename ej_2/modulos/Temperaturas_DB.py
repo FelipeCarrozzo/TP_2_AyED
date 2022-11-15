@@ -13,7 +13,7 @@ class Temperaturas_DB:
     def __str__(self):
         lista=[]
         for nodo in self.mediciones:
-            lista.append([str(nodo.clave.date()), nodo.carga_util])
+            lista.append([str(nodo.clave.date()), nodo.valor]) #date() retorna solo el formato fecha, no el formato hora
         return str(lista)
 
     def __iter__(self):
@@ -55,8 +55,8 @@ class Temperaturas_DB:
         ITERADOR = Iterador(self.mediciones, f_uno)
         for i in ITERADOR:
             if i.clave <= f_dos:
-                if i.carga_util > temp_max:
-                    temp_max = i.carga_util 
+                if i.valor > temp_max:
+                    temp_max = i.valor
             else:
                 break
         return temp_max
@@ -85,13 +85,12 @@ class Temperaturas_DB:
     def temp_extremos_rango(self,fecha1,fecha2):
         min_ = self.min_temp_rango(fecha1, fecha2)
         max_ = self.max_temp_rango(fecha1, fecha2)
-        # return f" MINIMO: {min_} MÁXIMO: {max_}"
         return min_,max_
     
     
     """
-    Método para borrar una temperatura (y por lo tanto una fecha) del
-    árbol. Se recibe por parametro la clave a borrar (fecha)
+    Método para borrar una temperatura (y por lo tanto una fecha) de 
+    la base de datos. Se recibe por parametro la clave a borrar (fecha).
     """
     def borrar_temperatura(self,fecha):
         fecha_conv = datetime.strptime(fecha, "%d/%m/%Y")
@@ -112,11 +111,10 @@ class Temperaturas_DB:
     
     """
     Método que retorna un entero (int) que representa el
-    tamaño del árbol. No recibe ningún dato por parámetro.
+    tamaño de la base de datos. No recibe ningún dato por parámetro.
     """
     def mostrar_cantidad_muestras(self):
-        cantidad = self.tamano
-        return cantidad
+        return self.tamano
     
 #%%
 
@@ -143,8 +141,9 @@ if __name__ == "__main__":
     # -------------------------------------------------------------------
     print("max y min en un rango",obj.temp_extremos_rango("07/03/2022", "29/10/2022"))
     # -------------------------------------------------------------------
-    print("mostrar temps en un rango"),obj.mostrar_temperaturas("07/03/2022", "29/10/2022")
+    print("mostrar temps en un rango:") 
+    print(obj.mostrar_temperaturas("07/03/2022", "29/10/2022"))
     # -------------------------------------------------------------------
-    print("mostrar cantidad de muestras registradas", obj.mostrar_cantidad_muestras())
+    print("mostrar cantidad de muestras registradas:", obj.mostrar_cantidad_muestras())
     # -------------------------------------------------------------------    
-    print(obj) 
+    # print(obj) 

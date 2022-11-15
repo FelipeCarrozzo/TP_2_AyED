@@ -9,7 +9,7 @@ class NodoArbol:
         self.izq = izquierdo
         self.der = derecho
         self.padre = padre
-    
+
    # def __str__(self):
    #      return str(self.clave) + str(self.valor)
    #      lista=[]
@@ -94,7 +94,7 @@ class NodoArbol:
        elif self.tieneAlgunHijo():
            if self.tiene_hijo_izquierdo():
                   if self.eshijo_izquierdo():
-                     self.padre.izq = self.izq
+                     self.padre.izq = self.izq 
                   else:
                      self.padre.der = self.izq
                   self.izq.padre = self.padre
@@ -137,7 +137,7 @@ class ArbolAVL:
         if self.raiz:
             self._agregar(clave,valor,self.raiz)
         else:
-            self.raiz = NodoArbol(clave,valor)
+            self.raiz = NodoArbol(clave,valor) #crea una raíz si no la hay
         self.tamano = self.tamano + 1
 
     def _agregar(self,clave,valor,nodoActual):
@@ -156,7 +156,7 @@ class ArbolAVL:
     def __setitem__(self,c,v):
        self.agregar(c,v)
 
-    def obtener(self,clave):
+    def obtener(self,clave): #retorna la temperatura de un día en particular
        if self.raiz:
            res = self._obtener(clave,self.raiz)
            if res:
@@ -204,13 +204,13 @@ class ArbolAVL:
 
 
     def remover(self,nodoActual):
-         if nodoActual.esHoja(): #hoja
-           if nodoActual == nodoActual.padre.izq:
+         if nodoActual.esHoja(): #suponiendo que es hoja
+           if nodoActual == nodoActual.padre.izq: #hijo izq del padre
                nodoActual.padre.izq = None
            else:
                nodoActual.padre.der = None
          elif nodoActual.tieneAlgunHijo(): #interior
-           suc = nodoActual.encontrarSucesor()
+           suc = nodoActual.encontrarSucesor() #busca el sucesor del nodo a eliminar
            suc.empalmar()
            nodoActual.clave = suc.clave
            nodoActual.carga_util = suc.carga_util

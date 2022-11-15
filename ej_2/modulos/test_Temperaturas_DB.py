@@ -136,6 +136,7 @@ class TestTemperaturasDB(unittest.TestCase):
             self.temp.guardar_temperatura(fecha, temp)   
             self.cant_temp +=1
         self.assertEqual(self.temp.tamano, self.cant_temp)
+        
 
 #%%
 if __name__ == "__main__":
