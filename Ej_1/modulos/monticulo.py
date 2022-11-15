@@ -44,6 +44,7 @@ class MonticuloBinario:
         al final de la lista. Esto garantiza que se mantendrá la propiedad de
         estructura completa del árbol.
         Recibe por parámetro un elemento.
+        Utiliza el método "infilt_arriba".
         """
         self.lista_monticulo.append(k)
         self.tamano_actual = self.tamano_actual + 1
@@ -54,7 +55,8 @@ class MonticuloBinario:
         """
         Método "eliminar_min" para eliminar la raíz. Este es el elemento
         mas pequeño.
-        No recibe parametros. 
+        No recibe parametros.
+        Utiliza el método "infilt_abajo".
         """
         valorSacado = self.lista_monticulo[1] #toma la raíz
         self.lista_monticulo[1] = self.lista_monticulo[self.tamano_actual] #llevo el último elemento insertado a la raíz (temporalmente)

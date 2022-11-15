@@ -1,8 +1,13 @@
 from datetime import date
 
 class NodoArbol:
+    
    
    def __init__(self,clave,valor,izquierdo=None,derecho=None,padre=None):
+        """
+        Constructor de la clase NodoArbol. 
+        Requiere como parámetro una clave y un valor.
+        """
         self.clave = clave
         self.valor = valor
         self.carga_util = valor
@@ -10,18 +15,12 @@ class NodoArbol:
         self.der = derecho
         self.padre = padre
 
-   # def __str__(self):
-   #      return str(self.clave) + str(self.valor)
-   #      lista=[]
-   #      for nodo in self:
-   #          lista.append([(nodo.clave.date()), nodo.carga_util])
-   #      return str(lista) 
-    
-   # def __repr__(self):
-   #      return str(self)
-       
+
         
    def __iter__(self):
+      """
+      Método mágico que itera sobre los nodos
+      """
       if self:
           if self.tiene_hijo_izquierdo():
                 for elem in self.izq:
@@ -32,46 +31,96 @@ class NodoArbol:
                   yield elem
 
    def tiene_hijo_izquierdo(self):
-        return self.izq
+       """ 
+       Verifica que el nodo actual tenga un hijo izquierdo (es padre).
+       De ser así, retorna el hijo izquierdo del nodoactual.
+       De no, retorna False (bool).
+       """
+       return self.izq
 
    def tiene_hijo_derecho(self):
+       """ 
+       Verifica que el nodo actual tenga un hijo derecho (es padre).
+       De ser así, retorna el hijo derecho del nodoactual.
+       De no, retorna False (bool).
+       """
        return self.der
 
    def eshijo_izquierdo(self):
+       """
+       Verifica que el nodo actual es hijo izquierdo.
+       Retorna el nodo padre y el padre izquierdo del nodo actual.
+       Si no es hijo izquierdo, retorna False (bool).
+       """
        return self.padre and self.padre.izq == self
 
    def eshijo_derecho(self):
+       """
+       Verifica que el nodo actual es hijo derecho.
+       Retorna el nodo padre y el padre derecho de un nodo.
+       Si no es hijo derecho, retorna False (bool).
+       """
        return self.padre and self.padre.der == self
 
    def es_raiz(self):
+       """ 
+       Verifica que el nodo actual sea raíz.
+       Si este no tiene padre, retorna True (es raíz).
+       """
        return not self.padre
 
    def esHoja(self):
+       """ 
+       Verifica que el nodo sea hoja.
+       Si no es hoja, retorna False (bool).
+       """
        return not (self.der or self.izq)
 
    def tieneAlgunHijo(self):
+       """
+       Retorna el hijo derecho o izquierdo de un nodo, si es que tiene. 
+       """
        return self.der or self.izq
 
    def tieneAmminimomosHijos(self):
+       """ 
+       
+       """
        return self.der and self.izq
 
    def reemplazar_dato_de_nodo(self,clave,valor,hizq,hder):
-       self.clave = clave
-       self.carga_util = valor
-       self.izq = hizq
-       self.der = hder
-       if self.tiene_izq():
-           self.izq.padre = self
-       if self.tiene_der():
-           self.der.padre = self
+        """ 
+        Requiere parámetros de clave, valor, hijo izquierdo e hijo derecho,
+        los cuales va a reemplazar el nodo actual. 
+        Si el nodo actual tiene hijo izquierdo, al nodo actual lo hace padre.
+        Si es hijo derecho, lo hace padre también. 
+        """
+        self.clave = clave
+        self.carga_util = valor
+        self.izq = hizq
+        self.der = hder
+        if self.tiene_izq():
+            self.izq.padre = self
+            if self.tiene_der():
+                self.der.padre = self
+           
+           
+
            
    def encontrarMin(self):
+      """
+      Busca el mínimo del nodo actual. 
+      """
       actual = self
       while actual.tiene_hijo_izquierdo():
           actual = actual.izq
       return actual 
            
    def encontrarSucesor(self):
+      """ 
+      Encuentra el nodo heredero del nodo actual y lo retorna.
+      Si este no existe retorna False (bool).
+      """
       suc = None
       if self.tiene_hijo_derecho():
           suc = self.der.encontrarMin()
@@ -86,6 +135,7 @@ class NodoArbol:
       return suc
   
    def empalmar(self):
+       
        if self.esHoja():
            if self.eshijo_izquierdo():
                   self.padre.izq = None

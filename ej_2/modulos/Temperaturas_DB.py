@@ -7,10 +7,18 @@ from datetime import datetime
 class Temperaturas_DB:
     
     def __init__(self):
+        """
+        El constructor de la clase Temperaturas_DB inicializa un ArbolAVL 
+        junto con un contador inicializado en cero declarado como "tamano".
+        """
         self.mediciones = ArbolAVL()
         self.tamano = 0
         
     def __str__(self):
+        """
+        El método mágico __str__ muestra por consola una lista de tuplas que 
+        contiene la fecha y la temperatura.
+        """ 
         lista=[]
         for nodo in self.mediciones:
             lista.append([str(nodo.clave.date()), nodo.valor]) #date() retorna solo el formato fecha, no el formato hora
@@ -19,8 +27,6 @@ class Temperaturas_DB:
     def __iter__(self):
         return str(self.mediciones)
     
-    def __len__(self):
-        return len(self.mediciones)
 
 #%%        
 
