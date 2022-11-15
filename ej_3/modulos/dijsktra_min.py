@@ -1,4 +1,4 @@
-from Trabajo_Practico2.ej_3.modulos.monticulo_min import MonticuloBinarioMin
+from ej_3.modulos.monticulo_min import MonticuloBinarioMin
 
 def dijkstra_de_min(un_grafo,inicio):
     """
