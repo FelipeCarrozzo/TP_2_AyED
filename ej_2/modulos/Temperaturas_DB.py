@@ -24,35 +24,38 @@ class Temperaturas_DB:
 
 #%%        
 
-    """
-    Método que agrega a la base de datos una clave y un valor 
-    (en este caso, fecha y temperatura, respectivamente), los cuales
-    se pasan por parámetro.
-    """
+
     def guardar_temperatura(self,fecha,temperatura):
+        """
+        Método que agrega a la base de datos una clave y un valor 
+        (en este caso, fecha y temperatura, respectivamente), los cuales
+        se pasan por parámetro.
+        """
         convertir_fecha = datetime.strptime(fecha,"%d/%m/%Y")
         self.mediciones.agregar(convertir_fecha,temperatura)
         self.tamano += 1
         
-    """
-    Método que retorna el valor (temperatura) en una fecha exacta.
-    Recibe por parámetro una clave (fecha).
-    """
+
     def devolver_temperatura(self,fecha):
+        """
+        Método que retorna el valor (temperatura) en una fecha exacta.
+        Recibe por parámetro una clave (fecha).
+        """
         convertir_fecha = datetime.strptime(fecha,"%d/%m/%Y")
         temp = self.mediciones.obtener(convertir_fecha)
         return temp
     
-    """
-    Método que retorna, dentro de un rango de fechas, la máxima 
-    temperatura registrada. Se pasa por parámetro dos claves (fechas).
-    """
+
     def max_temp_rango(self,fecha1, fecha2):
+        """
+        Método que retorna, dentro de un rango de fechas, la máxima 
+        temperatura registrada. Se pasa por parámetro dos claves (fechas).
+        """
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
         f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         temp_max = self.mediciones.obtener(f_uno)  #max_temp contiene la temperatura
         
-        ITERADOR = Iterador(self.mediciones, f_uno)
+        ITERADOR = Iterador(self.mediciones,f_uno)
         for i in ITERADOR:
             if i.clave <= f_dos:
                 if i.valor > temp_max:
@@ -62,15 +65,16 @@ class Temperaturas_DB:
         return temp_max
     
     
-    """
-    Método que retorna, dentro de un rango de fechas, la mínima 
-    temperatura registrada. Se pasa por parámetro dos claves (fechas).
-    """
+
     def min_temp_rango(self,fecha1, fecha2):
+        """
+        Método que retorna, dentro de un rango de fechas, la mínima 
+        temperatura registrada. Se pasa por parámetro dos claves (fechas).
+        """
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
         f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         temp_min = self.mediciones.obtener(f_uno)
-        ITERADOR = Iterador(self.mediciones, f_uno)
+        ITERADOR = Iterador(self.mediciones,f_uno)
         for i in ITERADOR:
             if i.clave <= f_dos:
                 if i.carga_util < temp_min:
@@ -80,42 +84,51 @@ class Temperaturas_DB:
         return temp_min
     
     
-    """
-    Método que devuelve la primer y última temperatura en un rango
-    de fecha. Se pasa por parámetro dos claves (fechas).
-    """
+
     def temp_extremos_rango(self,fecha1,fecha2):
+        """
+        Método que devuelve la primer y última temperatura en un rango
+        de fecha. Se pasa por parámetro dos claves (fechas).
+        """
         min_ = self.min_temp_rango(fecha1, fecha2)
         max_ = self.max_temp_rango(fecha1, fecha2)
         return min_,max_
     
     
-    """
-    Método para borrar una temperatura (y por lo tanto una fecha) de 
-    la base de datos. Se recibe por parametro la clave a borrar (fecha).
-    """
+
     def borrar_temperatura(self,fecha):
+        """
+        Método para borrar una temperatura (y por lo tanto una fecha) de 
+        la base de datos. Se recibe por parametro la clave a borrar (fecha).
+        """
         fecha_conv = datetime.strptime(fecha, "%d/%m/%Y")
         self.mediciones.eliminar(fecha_conv) 
         self.tamano -= 1
     
-    """
-    Método para mostrar la totalidad de temperaturas 
-    medidas entre una fecha y otra.
-    """
+
     def mostrar_temperaturas(self,fecha1,fecha2):
+        """
+        Método para mostrar la totalidad de temperaturas 
+        medidas entre una fecha y otra.
+        """
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
+        f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         Iter = Iterador(self.mediciones,f_uno)
         lista=[]
         for i in Iter:
+            if f_uno <= i.clave <= f_dos:
                 lista.append((str(i.clave.date()),i.valor))
-        return(lista)
+        return(lista) 
     
-    """
-    Método que retorna un entero (int) que representa el
-    tamaño de la base de datos. No recibe ningún dato por parámetro.
-    """
+ 
+    
+   
+
     def mostrar_cantidad_muestras(self):
+        """
+        Método que retorna un entero (int) que representa el
+        tamaño de la base de datos. No recibe ningún dato por parámetro.
+        """
         return self.tamano
     
 #%%
@@ -144,7 +157,7 @@ if __name__ == "__main__":
     print("max y min en un rango",obj.temp_extremos_rango("07/03/2022", "29/10/2022"))
     # -------------------------------------------------------------------
     print("mostrar temps en un rango:") 
-    print(obj.mostrar_temperaturas("07/03/2022", "29/10/2022"))
+    print(obj.mostrar_temperaturas("07/03/2022", "19/07/2022"))
     # -------------------------------------------------------------------
     print("mostrar cantidad de muestras registradas:", obj.mostrar_cantidad_muestras())
     # -------------------------------------------------------------------    
