@@ -2,10 +2,12 @@ class MonticuloBinario:
     
     
     def __init__(self):
-        """En el incicilizador, se declaran dos variables: "lista_monticulo"
+        """
+        En el incicilizador, se declaran dos variables: "lista_monticulo"
         inicializa una lista de Python con el valor cero. "tamano_actual"
         inicializa un contador en cero. Este se va a ir incremmentando en el 
-        caso de que se agregue un nodo, y decrementará cuando se elimine un nodo"""
+        caso de que se agregue un nodo, y decrementará cuando se elimine un nodo.
+        """
         self.lista_monticulo = [0] #el 1er elemento del monticulo simepre se inicializa con cero
         self.tamano_actual = 0
 
@@ -41,7 +43,7 @@ class MonticuloBinario:
         Método "insertar"  para agregar un ítem a una lista.Añade el elemento
         al final de la lista. Esto garantiza que se mantendrá la propiedad de
         estructura completa del árbol.
-        Recibe por parámetro un elemento
+        Recibe por parámetro un elemento.
         """
         self.lista_monticulo.append(k)
         self.tamano_actual = self.tamano_actual + 1
