@@ -3,9 +3,9 @@ class MonticuloBinario:
     
     def __init__(self):
         """
-        En el incicilizador, se declaran dos variables: "lista_monticulo"
+        En el inicializador, se declaran dos variables: "lista_monticulo"
         inicializa una lista de Python con el valor cero. "tamano_actual"
-        inicializa un contador en cero. Este se va a ir incremmentando en el 
+        inicializa un contador en cero. Este se va a ir incrementando en el 
         caso de que se agregue un nodo, y decrementará cuando se elimine un nodo.
         """
         self.lista_monticulo = [0] #el 1er elemento del monticulo simepre se inicializa con cero
