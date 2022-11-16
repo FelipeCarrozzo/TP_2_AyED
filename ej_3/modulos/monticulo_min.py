@@ -17,7 +17,7 @@ class MonticuloBinarioMin:      #Cola de Prioridad criterio mínimos
         None.
 
         """
-        self.lista_monticulo = [0]
+        self.lista_monticulo = [(0,0)]
         self.tamano_actual = 0
     
 
