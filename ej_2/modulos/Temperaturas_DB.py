@@ -62,7 +62,7 @@ class Temperaturas_DB:
         
         ITERADOR = Iterador(self.mediciones,f_uno)
         for i in ITERADOR:
-            if i.clave <= f_dos:
+            if i.clave <= f_dos and i.clave >= f_uno:
                 if i.valor > temp_max:
                     temp_max = i.valor
             else:
