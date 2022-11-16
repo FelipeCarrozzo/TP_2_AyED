@@ -18,7 +18,7 @@ class MonticuloBinarioMax:      #Cola de Prioridad criterio de máximos
         None.
 
         """
-        self.lista_monticulo = [0]
+        self.lista_monticulo = [(0,0)]
         self.tamano_actual = 0
         
         
