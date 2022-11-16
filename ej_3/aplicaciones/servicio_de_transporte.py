@@ -1,9 +1,9 @@
 """ ----> Importarción de los modulos <---- """
 
 
-from ej_3.modulos.dijsktra_max import dijkstra_de_pmax
-from ej_3.modulos.dijsktra_min import dijkstra_de_min
-from ej_3.modulos.grafoyvertice import Grafo
+from Trabajo_Practico2.ej_3.modulos.dijsktra_max import dijkstra_de_pmax
+from Trabajo_Practico2.ej_3.modulos.dijsktra_min import dijkstra_de_min
+from Trabajo_Practico2.ej_3.modulos.grafoyvertice import Grafo
 
 
 """ ----> Lectura del archivo y almacenamiento de datos <---- """
@@ -43,23 +43,30 @@ for i in range(len(datos_ciudades)):
 for i in grafo_ciudades_peso:
     print(i.id, i.dist)
 
-print("/n","----------------", "/n")
+print("\n","----------------", "\n")
 
 dijkstra_de_pmax(grafo_ciudades_peso,grafo_ciudades_peso.obtener_vertice("CiudadBs.As."))
 
-print("/n","----------------", "/n")
+print("\n","----------------", "\n")
 
 for i in grafo_ciudades_peso:
     print(i.id, i.dist)
     
-print("/n","----------------", "/n")
+print("\n","----------------", "\n")
 
-peso = 0                            # En la variable peso se guarda la capacidad máxima de peso transportable del destino seleccionado
+peso = 0                            # En la variable peso se guarda la capacidad máxima de peso transportable hacia el destino seleccionado
 for i in grafo_ciudades_peso:
     if i.id == destino:
         peso = i.dist
-    
-    
+
+nodo = grafo_ciudades_peso.obtener_vertice(destino)
+recorrido = []
+while nodo != None:
+    recorrido.append(nodo.id)
+    nodo = nodo.predecesor        
+recorrido.reverse()
+
+
 """ ----> Implementación del costo mínimo de transporte entre los caminos que tienen la misma o una mayor capacidad de peso a transportar <---- """         
 
 
@@ -83,14 +90,23 @@ for i in grafo_ciudades_costo:
     
 print("\n","----------------", "\n")
 
-costo = 0                            # En la variable costo se guarda el costo mínimo de transporte
+costo = 0                            # En la variable costo se guarda el costo mínimo de transporte hacia el destino seleccionado
 for i in grafo_ciudades_costo:
     if i.id == destino:
         costo = i.dist        
+        
+nodo = grafo_ciudades_costo.obtener_vertice(destino)
+recorrido2 = []
+while nodo != None:
+    recorrido2.append(nodo.id)
+    nodo = nodo.predecesor        
+recorrido2.reverse()
 
 """ ----> Se muestran los resultados <---- """  
 
      
 print("Para llegar a", destino,":", "\n", 
       "El peso máximo para transportar es:", peso,"kg", "\n",
-      "El costo mínimo de transporte es:","${costo: .3f}".format(costo=costo ))
+      "Y su ruta es: ", recorrido, "\n",
+      "El costo mínimo de transporte es:","${costo: .3f}".format(costo=costo ),
+      "Y su ruta es: ",recorrido2)

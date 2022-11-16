@@ -7,10 +7,18 @@ from datetime import datetime
 class Temperaturas_DB:
     
     def __init__(self):
+        """
+        El constructor de la clase Temperaturas_DB inicializa un ArbolAVL 
+        junto con un contador inicializado en cero declarado como "tamano".
+        """
         self.mediciones = ArbolAVL()
         self.tamano = 0
         
     def __str__(self):
+        """
+        El método mágico __str__ muestra por consola una lista de tuplas que 
+        contiene la fecha y la temperatura.
+        """ 
         lista=[]
         for nodo in self.mediciones:
             lista.append([str(nodo.clave.date()), nodo.valor]) #date() retorna solo el formato fecha, no el formato hora
@@ -19,11 +27,8 @@ class Temperaturas_DB:
     def __iter__(self):
         return str(self.mediciones)
     
-    def __len__(self):
-        return len(self.mediciones)
 
 #%%        
-
 
     def guardar_temperatura(self,fecha,temperatura):
         """
@@ -55,15 +60,14 @@ class Temperaturas_DB:
         f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         temp_max = self.mediciones.obtener(f_uno)  #O(log n)
         
-        ITERADOR = Iterador(self.mediciones,f_uno)
-        for i in ITERADOR:
-            if i.clave <= f_dos:
+        iterador = Iterador(self.mediciones,f_uno)
+        for i in iterador:
+            if i.clave <= f_dos and i.clave >= f_uno:
                 if i.valor > temp_max:
                     temp_max = i.valor
             else:
                 break
         return temp_max
-    
     
 
     def min_temp_rango(self,fecha1, fecha2):
@@ -74,8 +78,8 @@ class Temperaturas_DB:
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
         f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         temp_min = self.mediciones.obtener(f_uno)
-        ITERADOR = Iterador(self.mediciones,f_uno)
-        for i in ITERADOR:
+        iterador = Iterador(self.mediciones,f_uno)
+        for i in iterador:
             if i.clave <= f_dos:
                 if i.valor < temp_min:
                     temp_min = i.valor 
@@ -111,12 +115,16 @@ class Temperaturas_DB:
         Método para mostrar la totalidad de temperaturas 
         medidas entre una fecha y otra.
         """
-        f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
-        f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
-        Iter = Iterador(self.mediciones,f_uno)
+        f_uno = datetime.strptime(fecha1, "%d/%m/%Y") 
+        f_dos = datetime.strptime(fecha2, "%d/%m/%Y") 
+        Iter = Iterador(self.mediciones,f_uno) 
         lista=[]
         for i in Iter:
+<<<<<<< HEAD
             if i.clave <= f_dos:
+=======
+            if f_uno>= i.clave and i.clave <= f_dos:
+>>>>>>> 9afc952b5de2e0ab8f08bdd2dd1a2f3667314cc5
                 lista.append((str(i.clave.date()),i.valor))
             else:
                 break
@@ -159,7 +167,7 @@ if __name__ == "__main__":
     print("max y min en un rango",obj.temp_extremos_rango("07/03/2022", "29/10/2022"))
     # -------------------------------------------------------------------
     print("mostrar temps en un rango:") 
-    print(obj.mostrar_temperaturas("07/03/2022", "19/07/2022"))
+    print(obj.mostrar_temperaturas("07/03/2022", "20/10/2022"))
     # -------------------------------------------------------------------
     print("mostrar cantidad de muestras registradas:", obj.mostrar_cantidad_muestras())
     # -------------------------------------------------------------------    

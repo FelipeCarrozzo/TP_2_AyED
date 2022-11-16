@@ -8,7 +8,7 @@ class MonticuloBinario:
         inicializa un contador en cero. Este se va a ir incrementando en el 
         caso de que se agregue un nodo, y decrementará cuando se elimine un nodo.
         """
-        self.lista_monticulo = [0] #el 1er elemento del monticulo simepre se inicializa con cero
+        self.lista_monticulo = [0] #el 1er elemento del monticulo simepre se inicializa con cero, cla de prioridad
         self.tamano_actual = 0
 
     def __iter__(self):
@@ -28,7 +28,17 @@ class MonticuloBinario:
         Método "infilt_arriba" para recuperar la propiedad de montículo comparando
         el ítem recién agregado con su padre. Si el ítem recién agregado es menor
         que su padre, entonces podemos intercambiar el ítem con su padre.
-        Recibe por parámetro un int.
+        Recibe por parámetro un índice.
+
+        Parameters
+        ----------
+        i : TYPE: índice
+            Es el índice del nodo que se quiere infiltrar.
+
+        Returns
+        -------
+        None.
+
         """
         while i // 2 > 0:
           if self.lista_monticulo[i] < self.lista_monticulo[i // 2]:
@@ -40,10 +50,21 @@ class MonticuloBinario:
     
     def insertar(self,k):
         """
-        Método "insertar"  para agregar un ítem a una lista.Añade el elemento
+        Método "insertar"  para agregar un ítem a una lista. Añade el elemento
         al final de la lista. Esto garantiza que se mantendrá la propiedad de
         estructura completa del árbol.
         Recibe por parámetro un elemento.
+        Utiliza el método "infilt_arriba".
+
+        Parameters
+        ----------
+        k : TYPE: Int.
+            Este valor representa el riesgo del paciente.
+
+        Returns
+        -------
+        None.
+
         """
         self.lista_monticulo.append(k)
         self.tamano_actual = self.tamano_actual + 1
@@ -54,7 +75,14 @@ class MonticuloBinario:
         """
         Método "eliminar_min" para eliminar la raíz. Este es el elemento
         mas pequeño.
-        No recibe parametros. 
+        No recibe parametros.
+        Utiliza el método "infilt_abajo".
+
+        Returns
+        -------
+        valorSacado : TYPE: Int.
+            Es el riesgo del paciente.
+
         """
         valorSacado = self.lista_monticulo[1] #toma la raíz
         self.lista_monticulo[1] = self.lista_monticulo[self.tamano_actual] #llevo el último elemento insertado a la raíz (temporalmente)
@@ -65,6 +93,24 @@ class MonticuloBinario:
     
 
     def infilt_abajo(self,i):
+        """
+        Método "infilt_abajo" para recuperar la propiedad de montículo comparando
+        el ítem de la raíz con su hijo mas chico.
+        Si el ítem de la raís es menor que su hijo_min,
+        entonces podemos intercambiar el ítem con su hijo.
+        Esta acción se va repetir hasta que el vertice padre sea menor que
+        ambos nodos hijos.
+        Recibe por parámetro un índice.
+
+        Parameters
+        ----------
+        i : TYPE: índice
+            Es el índice del nodo que se quiere infiltrar.
+
+        Returns
+        -------
+        None.
+        """
         while (i * 2) <= self.tamano_actual:
             hm = self.hijo_min(i)
             if self.lista_monticulo[i] > self.lista_monticulo[hm]:
@@ -74,6 +120,26 @@ class MonticuloBinario:
             i = hm
             
     def hijo_min(self,i):
+        """
+        Este método compara ambos vertices hijo de un vertice padre. 
+        La función utiliza los índices para hacer referencia a
+        cada vertice. El vertice hijo que sea más chico será designado como el hijo_min.
+        El índice del vertice padre es lo que recibe la función como parámetro. 
+        
+
+        Parameters
+        ----------
+        i : TYPE: Index
+            Es el índice del nodo padre.
+
+        Returns
+        -------
+        i * 2: TYPE: Index
+            Es índice del hijo izquierdo del vertice padre.
+        i * 2 + 1: TYPE: Index
+            Es el índice del hijo derecho del vertice padre.
+
+        """
         if i * 2 + 1 > self.tamano_actual:
             return i * 2
         else:
