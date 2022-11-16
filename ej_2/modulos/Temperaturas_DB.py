@@ -115,12 +115,12 @@ class Temperaturas_DB:
         Método para mostrar la totalidad de temperaturas 
         medidas entre una fecha y otra.
         """
-        f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
-        f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
-        Iter = Iterador(self.mediciones,f_uno)
+        f_uno = datetime.strptime(fecha1, "%d/%m/%Y") 
+        f_dos = datetime.strptime(fecha2, "%d/%m/%Y") 
+        Iter = Iterador(self.mediciones,f_uno) 
         lista=[]
         for i in Iter:
-            if i.clave <= f_dos:
+            if f_uno>= i.clave and i.clave <= f_dos:
                 lista.append((str(i.clave.date()),i.valor))
         return(lista) 
     
