@@ -60,8 +60,8 @@ class Temperaturas_DB:
         f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         temp_max = self.mediciones.obtener(f_uno)  #max_temp contiene la temperatura
         
-        ITERADOR = Iterador(self.mediciones,f_uno)
-        for i in ITERADOR:
+        iterador = Iterador(self.mediciones,f_uno)
+        for i in iterador:
             if i.clave <= f_dos and i.clave >= f_uno:
                 if i.valor > temp_max:
                     temp_max = i.valor
@@ -78,8 +78,8 @@ class Temperaturas_DB:
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y")
         f_dos = datetime.strptime(fecha2, "%d/%m/%Y")
         temp_min = self.mediciones.obtener(f_uno)
-        ITERADOR = Iterador(self.mediciones,f_uno)
-        for i in ITERADOR:
+        iterador = Iterador(self.mediciones,f_uno)
+        for i in iterador:
             if i.clave <= f_dos:
                 if i.carga_util < temp_min:
                     temp_min = i.valor 
