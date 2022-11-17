@@ -1,6 +1,5 @@
 """ ----> Importarción de los modulos <---- """
 
-
 from ej_3.modulos.dijsktras import dijkstra_max
 from ej_3.modulos.dijsktras import dijkstra_min
 from ej_3.modulos.grafoyvertice import Grafo
@@ -69,9 +68,6 @@ for i in range(len(datos_ciudades)):
     if datos_ciudades[i][2] >= peso:
         grafo_ciudades_costo.agregar_arista(datos_ciudades[i][0],datos_ciudades[i][1],datos_ciudades[i][3]) 
 
-
-
-print("\n","----------------", "\n")
 
 dijkstra_min(grafo_ciudades_costo,grafo_ciudades_costo.obtener_vertice("CiudadBs.As."))
 
