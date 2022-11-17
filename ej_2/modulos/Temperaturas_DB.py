@@ -121,7 +121,6 @@ class Temperaturas_DB:
         lista=[]
         for i in Iter:
             if i.clave <= f_dos:
-                if f_uno>= i.clave and i.clave <= f_dos:
                     lista.append((str(i.clave.date()),i.valor))
             else:
                 break
