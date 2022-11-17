@@ -1,6 +1,6 @@
-from ej_3.modulos.monticulo_min import MonticuloBinarioMin
-from ej_3.modulos.dijsktra_max import dijkstra_de_pmax
-from ej_3.modulos.dijsktra_min import dijkstra_de_min
+from ej_3.modulos.monticulos import MonticuloBinarioMin
+from ej_3.modulos.dijsktras import dijkstra_max
+from ej_3.modulos.dijsktras import dijkstra_min
 
 class Vertice:
     """
@@ -258,7 +258,7 @@ if __name__ == "__main__":
         
     inicio=grafo.obtener_vertice("a")
     # print(inicio)
-    dijkstra_de_min(grafo,inicio)
+    dijkstra_min(grafo,inicio)
     
     for i in grafo:
         print (i)

@@ -1,15 +1,15 @@
 """ ----> Importarción de los modulos <---- """
 
 
-from ej_3.modulos.dijsktra_max import dijkstra_de_pmax
-from ej_3.modulos.dijsktra_min import dijkstra_de_min
+from ej_3.modulos.dijsktras import dijkstra_max
+from ej_3.modulos.dijsktras import dijkstra_min
 from ej_3.modulos.grafoyvertice import Grafo
 
 
 """ ----> Lectura del archivo y almacenamiento de datos <---- """
 
 
-with open ("rutas.txt", "r") as rutas:
+with open ("C:/Users/usr/Documents/TP2_AyED/ej_3/aplicaciones/rutas.txt", "r") as rutas:
     ciudades = []
     datos_ciudades = []
     for ruta in rutas:
@@ -28,7 +28,7 @@ with open ("rutas.txt", "r") as rutas:
     
 
 print("Partiendo desede Ciudad De Buenos Aires:", "\n", "De la siguiente lista de destinos, seleccione uno para conocer su máximo cuello de botella y el camino con menor costo de transporte.", "\n",ciudades[1:])
-destino= input("Ingrese la ciudad destino:")
+destino= input("Ingrese la ciudad destino: ")
 
 
 """ ----> Implementación del máximo cuello de botella <---- """ 
@@ -45,7 +45,7 @@ for i in grafo_ciudades_peso:
 
 print("\n","----------------", "\n")
 
-dijkstra_de_pmax(grafo_ciudades_peso,grafo_ciudades_peso.obtener_vertice("CiudadBs.As."))
+dijkstra_max(grafo_ciudades_peso,grafo_ciudades_peso.obtener_vertice("CiudadBs.As."))
 
 print("\n","----------------", "\n")
 
@@ -81,7 +81,7 @@ for i in grafo_ciudades_costo:
 
 print("\n","----------------", "\n")
 
-dijkstra_de_min(grafo_ciudades_costo,grafo_ciudades_costo.obtener_vertice("CiudadBs.As."))
+dijkstra_min(grafo_ciudades_costo,grafo_ciudades_costo.obtener_vertice("CiudadBs.As."))
 
 print("\n","----------------", "\n")
 
