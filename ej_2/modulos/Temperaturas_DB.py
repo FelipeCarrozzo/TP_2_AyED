@@ -120,12 +120,9 @@ class Temperaturas_DB:
         Iter = Iterador(self.mediciones,f_uno) 
         lista=[]
         for i in Iter:
-<<<<<<< HEAD
             if i.clave <= f_dos:
-=======
-            if f_uno>= i.clave and i.clave <= f_dos:
->>>>>>> 9afc952b5de2e0ab8f08bdd2dd1a2f3667314cc5
-                lista.append((str(i.clave.date()),i.valor))
+                if f_uno>= i.clave and i.clave <= f_dos:
+                    lista.append((str(i.clave.date()),i.valor))
             else:
                 break
         return(lista) 
