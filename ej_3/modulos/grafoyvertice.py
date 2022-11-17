@@ -79,6 +79,7 @@ class Vertice:
 
         """
         return self.conectado_a.keys()
+        #devuelve todas las claves que estén conectadas al vértice
 
     def obtener_id(self):
         """
@@ -171,7 +172,7 @@ class Grafo:
         ----------
         n : TYPE: Vertice
             Es el vertice que se quiere saber su existencia en la lista de
-            verticees.
+            vertices.
 
         Returns
         -------

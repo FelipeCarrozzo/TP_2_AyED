@@ -126,9 +126,7 @@ class Temperaturas_DB:
                 break
         return(lista) 
     
- 
-    
-   
+
 
     def mostrar_cantidad_muestras(self):
         """

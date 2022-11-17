@@ -1,4 +1,4 @@
-from Trabajo_Practico2.ej_3.modulos.monticulo_min import MonticuloBinarioMin
+from ej_3.modulos.monticulo_min import MonticuloBinarioMin
 
 def dijkstra_de_min(un_grafo,inicio):
     """
@@ -29,7 +29,7 @@ def dijkstra_de_min(un_grafo,inicio):
     while not cp.esta_vacia():
         
         vertice_actual = cp.eliminar_min()
-        
+        #elimina la raíz, el elemento mas pequeño
         for vertice_siguiente in vertice_actual.obtener_conexiones():
             
             nueva_distancia = vertice_actual.obtener_distancia() + vertice_actual.obtener_ponderacion(vertice_siguiente)

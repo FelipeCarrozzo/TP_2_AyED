@@ -20,10 +20,12 @@ def dijkstra_de_pmax(un_grafo,inicio):
     """
     cp = MonticuloBinarioMax()
     inicio.asignar_distancia(9999)
-    cp.construir_monticulo([(v.obtener_distancia(),v) for v in un_grafo])
+    cp.construir_monticulo([(v.obtener_distancia(),v) for v in un_grafo]) 
+    #lista detuplas por comprensión
     while not cp.esta_vacia():
         
         vertice_actual = cp.eliminar_max()
+        #elimina la raíz, el elemento mas grande, lo retorna
         
         for vertice_siguiente in vertice_actual.obtener_conexiones():
             
@@ -33,3 +35,4 @@ def dijkstra_de_pmax(un_grafo,inicio):
                 vertice_siguiente.asignar_distancia(nueva_distancia)
                 vertice_siguiente.asignar_predecesor(vertice_actual)
                 cp.decrementar_clave(vertice_siguiente,nueva_distancia)
+                
