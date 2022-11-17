@@ -1,9 +1,9 @@
 """ ----> Importarción de los modulos <---- """
 
 
-from Trabajo_Practico2.ej_3.modulos.dijsktra_max import dijkstra_de_pmax
-from Trabajo_Practico2.ej_3.modulos.dijsktra_min import dijkstra_de_min
-from Trabajo_Practico2.ej_3.modulos.grafoyvertice import Grafo
+from ej_3.modulos.dijsktra_max import dijkstra_de_pmax
+from ej_3.modulos.dijsktra_min import dijkstra_de_min
+from ej_3.modulos.grafoyvertice import Grafo
 
 
 """ ----> Lectura del archivo y almacenamiento de datos <---- """
