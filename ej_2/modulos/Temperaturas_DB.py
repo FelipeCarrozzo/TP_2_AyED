@@ -117,9 +117,9 @@ class Temperaturas_DB:
         """
         f_uno = datetime.strptime(fecha1, "%d/%m/%Y") 
         f_dos = datetime.strptime(fecha2, "%d/%m/%Y") 
-        Iter = Iterador(self.mediciones,f_uno) 
+        iterador = Iterador(self.mediciones,f_uno) 
         lista=[]
-        for i in Iter:
+        for i in iterador:
             if i.clave <= f_dos:
                     lista.append((str(i.clave.date()),i.valor))
             else:
