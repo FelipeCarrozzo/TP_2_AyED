@@ -1,6 +1,6 @@
-from Trabajo_Practico2.ej_3.modulos.monticulo_min import MonticuloBinarioMin
-from Trabajo_Practico2.ej_3.modulos.dijsktra_max import dijkstra_de_pmax
-from Trabajo_Practico2.ej_3.modulos.dijsktra_min import dijkstra_de_min
+from ej_3.modulos.monticulo_min import MonticuloBinarioMin
+from ej_3.modulos.dijsktra_max import dijkstra_de_pmax
+from ej_3.modulos.dijsktra_min import dijkstra_de_min
 
 class Vertice:
     """
