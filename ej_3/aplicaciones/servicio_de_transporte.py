@@ -40,19 +40,12 @@ for i in range(len(datos_ciudades)):
     
     grafo_ciudades_peso.agregar_arista(datos_ciudades[i][0],datos_ciudades[i][1],datos_ciudades[i][2]) 
 
-for i in grafo_ciudades_peso:
-    print(i.id, i.dist)
 
 print("\n","----------------", "\n")
 
 dijkstra_max(grafo_ciudades_peso,grafo_ciudades_peso.obtener_vertice("CiudadBs.As."))
 
-print("\n","----------------", "\n")
 
-for i in grafo_ciudades_peso:
-    print(i.id, i.dist)
-    
-print("\n","----------------", "\n")
 
 peso = 0                            # En la variable peso se guarda la capacidad máxima de peso transportable hacia el destino seleccionado
 for i in grafo_ciudades_peso:
@@ -76,19 +69,14 @@ for i in range(len(datos_ciudades)):
     if datos_ciudades[i][2] >= peso:
         grafo_ciudades_costo.agregar_arista(datos_ciudades[i][0],datos_ciudades[i][1],datos_ciudades[i][3]) 
 
-for i in grafo_ciudades_costo:
-    print(i.id, i.dist)
+
 
 print("\n","----------------", "\n")
 
 dijkstra_min(grafo_ciudades_costo,grafo_ciudades_costo.obtener_vertice("CiudadBs.As."))
 
-print("\n","----------------", "\n")
 
-for i in grafo_ciudades_costo:
-    print(i.id, i.dist)
-    
-print("\n","----------------", "\n")
+
 
 costo = 0                            # En la variable costo se guarda el costo mínimo de transporte hacia el destino seleccionado
 for i in grafo_ciudades_costo:
