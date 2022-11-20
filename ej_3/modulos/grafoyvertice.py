@@ -1,5 +1,3 @@
-from ej_3.modulos.monticulos import MonticuloBinarioMin
-from ej_3.modulos.dijsktras import dijkstra_max
 from ej_3.modulos.dijsktras import dijkstra_min
 
 class Vertice:
@@ -133,8 +131,8 @@ class Vertice:
 class Grafo:
     """ 
     Clase que inicializa un grafo. 
-        Contiene un dicionario de vertices y la cantidad de vertices que
-        contiene este diccionario.
+        Contiene un dicionario de vertices y la cantidad de 
+        vertices que contiene este diccionario.
     """
     def __init__(self):
         self.lista_vertices = {}
@@ -253,15 +251,13 @@ if __name__ == "__main__":
     # vecinos = grafo.obtener_vertice("a").obtener_conexiones()
     # print("\n") 
     
-    for i in grafo:
-        print(i)
         
     inicio=grafo.obtener_vertice("a")
-    # print(inicio)
+    print(inicio)
     dijkstra_min(grafo,inicio)
     
-    for i in grafo:
-        print (i)
+    # for i in grafo:
+    #     print (i)
     
     
     
