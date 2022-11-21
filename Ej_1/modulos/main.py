@@ -4,9 +4,9 @@ Sala de emergencias
 
 import time
 import datetime
-import paciente as pac
+from Ej_1.modulos import paciente as pac
 import random
-import monticulo as mon
+from Ej_1.modulos import monticulo as mon
 
 n = 20  # cantidad de ciclos de simulación
 
@@ -46,7 +46,7 @@ for i in range(n):
     print()
 
     """
-    Se muestran los pacientes restantes en la cola de espera
+    Se muestran los pacientes restantes en la sala de espera
     """
     print('Pacientes que faltan atenderse:', len(cola_de_espera))
     for paciente in cola_de_espera:
