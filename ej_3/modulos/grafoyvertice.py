@@ -77,7 +77,8 @@ class Vertice:
 
         """
         return self.conectado_a.keys()
-        #devuelve todas las claves que estén conectadas al vértice
+        #devuelve una lista con todas las claves que estén conectadas 
+        #al vértice
 
     def obtener_id(self):
         """

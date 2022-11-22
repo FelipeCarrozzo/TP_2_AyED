@@ -68,7 +68,7 @@ def dijkstra_max(un_grafo,inicio):
     while not cp.esta_vacia():
         
         vertice_actual = cp.eliminar_max()
-        #elimina la raíz, el elemento mas grande, lo retorna
+        #elimina la raíz (nodo de origen), el elemento mas grande, lo retorna
         
         for vertice_siguiente in vertice_actual.obtener_conexiones():
             
