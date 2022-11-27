@@ -193,7 +193,7 @@ class ArbolAVL:
     def _agregar(self,clave,valor,nodoActual):
         if clave < nodoActual.clave:
             if nodoActual.tiene_hijo_izquierdo():
-                   self._agregar(clave,valor,nodoActual.izq)
+                   self._agregar(clave,valor,nodoActual.izq) #subarbol izquierdo de la raiz
             else:
                    nodoActual.izq = NodoArbol(clave,valor,padre=nodoActual)
         else:
@@ -369,7 +369,8 @@ class Iterador:
         nodo_salida = self.nodo_inicio #se guarda el nodo desde donde va a iterar
         if self.nodo_inicio == None: #si el nodo no tiene ningun valor
             raise StopIteration
-        self.nodo_inicio = self.nodo_inicio.encontrarSucesor() # atualiza valor del nodo
+        self.nodo_inicio = self.nodo_inicio.encontrarSucesor() # atualiza valor del nodo. 
+                                                               #recorre desde un inicio hasta el final del arbol
         return nodo_salida
 
     def __iter__(self):
