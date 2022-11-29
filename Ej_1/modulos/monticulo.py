@@ -96,9 +96,9 @@ class MonticuloBinario:
         """
         Método "infilt_abajo" para recuperar la propiedad de montículo comparando
         el ítem de la raíz con su hijo mas chico.
-        Si el ítem de la raís es menor que su hijo_min,
+        Si la clave de la raíz es menor que la clave de su hijo_min,
         entonces podemos intercambiar el ítem con su hijo.
-        Esta acción se va repetir hasta que el vertice padre sea menor que
+        Esta acción se va repetir hasta que el nodo padre sea menor que
         ambos nodos hijos.
         Recibe por parámetro un índice.
 
@@ -121,10 +121,10 @@ class MonticuloBinario:
             
     def hijo_min(self,i):
         """
-        Este método compara ambos vertices hijo de un vertice padre. 
-        La función utiliza los índices para hacer referencia a
-        cada vertice. El vertice hijo que sea más chico será designado como el hijo_min.
-        El índice del vertice padre es lo que recibe la función como parámetro. 
+        Este método compara ambos nodos hijo de un nodo padre. 
+        La función utiliza los índices para hacer referencia a cada vertice.
+        El vertice hijo que sea más chico será designado como el hijo_min.
+        El índice del nodo padre es lo que recibe la función como parámetro. 
         
 
         Parameters
