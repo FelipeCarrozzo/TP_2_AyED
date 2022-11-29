@@ -159,7 +159,7 @@ class MonticuloBinarioMin:      #Cola de Prioridad criterio mínimos
                 return i * 2 + 1
     def construir_monticulo(self,una_lista):
         """
-        Este método construye un monticulo a partir de una lista. La misma
+        Este m�todo construye un monticulo a partir de una lista. La misma
         se va ordenando segun el peso de cada valor.
 
         Parameters
@@ -203,7 +203,7 @@ class MonticuloBinarioMin:      #Cola de Prioridad criterio mínimos
     
     def decrementar_clave(self, valor, nueva_clave):
         """
-        Este método se utiliza para asignarle una nueva distancia a un vertice.
+        Este m�todo se utiliza para asignarle una nueva distancia a un vertice.
 
         Parameters
         ----------
@@ -439,7 +439,7 @@ class MonticuloBinarioMax:      #Cola de Prioridad criterio de máximos
             
     def construir_monticulo(self,unaLista):
         """
-        Este método construye un monticulo a partir de una lista. La misma
+        Este m�todo construye un monticulo a partir de una lista. La misma
         se va ordenando segun el peso de cada valor.
 
         Parameters
@@ -486,3 +486,8 @@ class MonticuloBinarioMax:      #Cola de Prioridad criterio de máximos
 
 
 
+if __name__ == "__main__":
+    l_mont = [21,10,14,39,21,45,73]
+    obj = MonticuloBinarioMin()
+    obj.construir_monticulo(l_mont)
+    print(obj)
