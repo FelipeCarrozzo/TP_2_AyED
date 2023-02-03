@@ -1,11 +1,13 @@
 """ ----> Importarción de los modulos <---- """
 
-from ej_3.modulos.dijsktras import dijkstra_max
+from TP2_AyED.ej_3.modulos.dijsktras import dijkstra_max
 from ej_3.modulos.dijsktras import dijkstra_min
 from ej_3.modulos.grafoyvertice import Grafo
 
 
-""" ----> Lectura del archivo y almacenamiento de datos <---- """
+""" 
+----> Lectura del archivo y almacenamiento de datos <---- 
+"""
 
 
 with open ("rutas.txt", "r") as rutas:
@@ -23,14 +25,18 @@ with open ("rutas.txt", "r") as rutas:
             ciudades.append(a)
 
 
-""" ----> Solicitud del destino a analizar <---- """     
+""" 
+----> Solicitud del destino a analizar <---- 
+"""
     
 
 print("Partiendo desede Ciudad De Buenos Aires:", "\n", "De la siguiente lista de destinos, seleccione uno para conocer su máximo cuello de botella y el camino con menor costo de transporte.", "\n",ciudades[1:])
 destino= input("Ingrese la ciudad destino: ")
 
 
-""" ----> Implementación del máximo cuello de botella <---- """ 
+""" 
+----> Implementación del máximo cuello de botella <---- 
+"""
 
 
 grafo_ciudades_peso = Grafo()
